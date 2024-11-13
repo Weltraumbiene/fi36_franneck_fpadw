@@ -1,3 +1,15 @@
+ich hab eine Datenbank mit dem Namen fi36_franneck_fpadw erstellt. In der sind vier Tabellen. Die erste Tabelle heißt user und speichert die E-Mail-Adressen und Passwörter der Benutzer. Die E-Mail-Adresse ist dabei der Hauptschlüssel, also eindeutig für jeden Benutzer. Dann gibt es die Tabelle product, in der Produkte gespeichert werden. Da sind die Spalten für den Namen des Produkts und die Menge, die auf Lager ist. Die Menge ist standardmäßig auf 0 gesetzt.
+
+Die nächste Tabelle heißt order und da werden Bestellungen von Nutzern gespeichert. Jede Bestellung hat eine eigene ID, die E-Mail des Nutzers, der bestellt hat, und das Bestelldatum. Wenn der Nutzer gelöscht wird, bleibt die Bestellung trotzdem in der Tabelle, aber die E-Mail wird auf null gesetzt.
+
+Die letzte Tabelle heißt order_item und da wird gespeichert, welche Produkte in einer Bestellung enthalten sind. Da steht die Menge jedes Produkts, das bestellt wurde, sowie Verweise auf die Bestell-ID und die Produkt-ID. Wenn eine Bestellung oder ein Produkt gelöscht wird, verschwinden auch die zugehörigen Einträge in dieser Tabelle.
+
+Alle Tabellen sind miteinander verknüpft, sodass man immer genau weiß, welche Bestellungen zu welchem Nutzer und welche Produkte zu einer Bestellung gehören.
+
+So zumindest die Theorie! :D
+Ich habe einen SQL Dump bereits commitet (nicht als Teil der Projektabgabe)
+
+
 Einrichtung der API:
 
 Ich habe eine API mit Express erstellt, die grundlegende Funktionen wie Registrierung (/register), Login (/login) und eine geschützte Profilseite (/profile) umfasst. Um die Benutzerdaten sicher zu übertragen und zu verifizieren, habe ich JSON Web Tokens (JWT) genutzt. Die Passwörter werden mit bcrypt sicher gehasht, bevor sie in der Datenbank gespeichert werden. Die Verbindung zur MariaDB-Datenbank läuft über das mariadb-Modul, wobei alle sensiblen Daten in der secrets.js-Datei gespeichert sind.
