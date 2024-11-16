@@ -1,3 +1,4 @@
+13.11.2024
 ich hab eine Datenbank mit dem Namen fi36_franneck_fpadw erstellt. In der sind vier Tabellen. Die erste Tabelle heißt user und speichert die E-Mail-Adressen und Passwörter der Benutzer. Die E-Mail-Adresse ist dabei der Hauptschlüssel, also eindeutig für jeden Benutzer. Dann gibt es die Tabelle product, in der Produkte gespeichert werden. Da sind die Spalten für den Namen des Produkts und die Menge, die auf Lager ist. Die Menge ist standardmäßig auf 0 gesetzt.
 
 Die nächste Tabelle heißt order und da werden Bestellungen von Nutzern gespeichert. Jede Bestellung hat eine eigene ID, die E-Mail des Nutzers, der bestellt hat, und das Bestelldatum. Wenn der Nutzer gelöscht wird, bleibt die Bestellung trotzdem in der Tabelle, aber die E-Mail wird auf null gesetzt.
@@ -10,6 +11,7 @@ So zumindest die Theorie! :D
 Ich habe einen SQL Dump bereits commitet (nicht als Teil der Projektabgabe)
 
 
+14.11.2024
 Einrichtung der API:
 
 Ich habe eine API mit Express erstellt, die grundlegende Funktionen wie Registrierung (/register), Login (/login) und eine geschützte Profilseite (/profile) umfasst. Um die Benutzerdaten sicher zu übertragen und zu verifizieren, habe ich JSON Web Tokens (JWT) genutzt. Die Passwörter werden mit bcrypt sicher gehasht, bevor sie in der Datenbank gespeichert werden. Die Verbindung zur MariaDB-Datenbank läuft über das mariadb-Modul, wobei alle sensiblen Daten in der secrets.js-Datei gespeichert sind.
@@ -40,3 +42,7 @@ Profil-Route: Mit dem erhaltenen Token konnte ich die geschützte Profilseite (/
 
 curl -X GET http://bcf.mshome.net:4000/api/profile \
 -H "Authorization: Bearer <TOKEN>"
+
+16.11.2024
+Ich hab mithilfe von Unterrichtsmaterialien einen React-Server zum laufen gebracht. Der Server ist soweit startklar und wird jetzt nach und nach an die Anforderungen vom Projekt angepasst. Momentan dient das ganze nur als Gerüst, auf dem ich das eigentliche Projekt aufbauen werde. Es ist also noch nichts fertiges, sondern mehr eine Basis, mit der ich weiterarbeiten kann.
+
