@@ -1,3 +1,4 @@
+// /srv/www/fi36_franneck_fpadw/backend/routes/secrets.js
 const secrets = {
     db_server: 'localhost',
     db_port: 3306,  // Optional: Standardport für MariaDB/MySQL
