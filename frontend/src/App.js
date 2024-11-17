@@ -16,8 +16,9 @@ const App = () => {
       <Shop />
       <Contact />
       <Imprint />
+      <ScrollButtons /> 
       <Footer />
-      <ScrollButtons />  {/* Füge die ScrollButtons-Komponente ein */}
+ 
     </div>
   );
 };
