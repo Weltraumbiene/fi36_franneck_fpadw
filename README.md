@@ -46,3 +46,7 @@ curl -X GET http://bcf.mshome.net:4000/api/profile \
 16.11.2024
 Ich hab mithilfe von Unterrichtsmaterialien einen React-Server zum laufen gebracht. Der Server ist soweit startklar und wird jetzt nach und nach an die Anforderungen vom Projekt angepasst. Momentan dient das ganze nur als Gerüst, auf dem ich das eigentliche Projekt aufbauen werde. Es ist also noch nichts fertiges, sondern mehr eine Basis, mit der ich weiterarbeiten kann.
 
+17.11.2024
+Das Layout wurde auf SPA umgestellt und den Projektanforderungen angepasst. Für die Warbarkeit wurde ein ausgelagerter Footer und Header implementiert. Für eine intuitive 
+Benutzung sind direkt auf der Startseite zwei CTA Buttons erstellt worden. Login und Kontakt.
+Im Footer könnte man rechtliche Hinweise einbinden, aber gegenwärtig dient er nur als Platzhalter.
