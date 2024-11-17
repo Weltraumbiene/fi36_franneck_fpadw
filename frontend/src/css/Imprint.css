@@ -1,0 +1,45 @@
+.section {
+    padding: 40px;
+    text-align: center;
+  }
+  
+  .imprint-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .imprint-box {
+    background-color: #f0f0f0; /* Hellgrauer Hintergrund */
+    border-radius: 10px; /* Abgerundete Ecken */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Schatten */
+    padding: 20px;
+    width: 300px; /* Festgelegte Breite */
+    text-align: left; /* Text linksbündig */
+  }
+  
+  .imprint-box h2 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  
+  .imprint-box p {
+    margin: 5px 0;
+    font-size: 0.9rem; /* Schriftgröße etwas kleiner */
+    color: #000; /* Schwarzer Text */
+  }
+  
+  .imprint-box a {
+    color: #000; /* Links in Schwarz */
+    text-decoration: none; /* Keine Unterstreichung */
+  }
+  
+  .imprint-box a:hover {
+    color: #555; /* Mouseover-Effekt für Links */
+  }
+  
+  .imprint-box:hover {
+    background-color: #e0e0e0; /* Mouseover-Effekt für Boxen */
+  }
+  

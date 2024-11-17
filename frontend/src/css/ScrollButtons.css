@@ -1,0 +1,68 @@
+/* Style für den Scroll-Button */
+.scroll-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.5rem;
+    transition: background-color 0.3s;
+  }
+  
+  .scroll-button:hover {
+    background-color: #474747;
+  }
+  
+  .scroll-up {
+    bottom: 80px; /* Platz für den unteren Button */
+  }
+  
+  .scroll-down {
+    bottom: 20px;
+  }
+  
+  .scroll-button:active {
+    background-color: #353535;
+  }
+  
+  /* Scroll Buttons */
+  .scroll-button {
+    position: fixed;
+    right: 20px;
+    background-color: #585858;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.5rem;
+    text-decoration: none;
+    transition: opacity 0.5s ease;  /* Übergang für das Ausblenden */
+    z-index: 1000;
+  }
+  
+  .scroll-button.scroll-up {
+    top: 40%;
+  }
+  
+  .scroll-button.scroll-down {
+    bottom: 40%;
+  }
+  
+  .scroll-button.hidden {
+    opacity: 0;
+    pointer-events: none; /* Verhindert, dass der Button noch geklickt werden kann */
+  }
+  

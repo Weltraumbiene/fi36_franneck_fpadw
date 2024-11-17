@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-scroll';
-import '../App.css';  // Importiere das CSS für die Buttons
+import '../css/ScrollButtons.css';
 
 const ScrollButtons = () => {
   const [showTopButton, setShowTopButton] = useState(false);

@@ -1,18 +1,9 @@
 import React from 'react';
+import '../css/Home.css';
 
 const Home = () => {
-  const sectionStyle = {
-    backgroundImage: 'url(/images/bgr_home.png)',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
-    height: '100vh',  // Höhe der Sektion auf 100% des Viewports setzen
-    color: 'white',  // Textfarbe für bessere Lesbarkeit
-    padding: '20px',  // Optional: Padding für inneren Abstand
-  };
-
   return (
-    <section id="start" className="section" style={sectionStyle}>
+    <section id="start" className="section">
       <h1>Willkommen</h1>
       <p>Dies ist der Startbereich der Anwendung.</p>
     </section>

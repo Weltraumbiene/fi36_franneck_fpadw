@@ -1,6 +1,6 @@
 // src/components/Header.js
 import React from 'react';
-import '../App.css';
+import '../css/Header.css';
 
 const Header = () => {
   const scrollToSection = (id) => {
