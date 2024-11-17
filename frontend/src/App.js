@@ -1,51 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './App.css';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
-import { Routes, Route } from 'react-router-dom';
-import { Container } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
-
-import Home from './components/Home';
-import Contact from './components/Contact';
-import Navigation from './components/Navigation';
-import Login from './components/Login';
-import UserProfile from './components/UserProfile';
-
-function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    // Prüfen, ob ein Token und userId im Local Storage vorhanden ist
-    const token = localStorage.getItem('token');
-    const storedUserId = localStorage.getItem('userId');
-
-    if (token && storedUserId) {
-      setIsLoggedIn(true);
-    }
-  }, []);
-
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('userId');
-    setIsLoggedIn(false);
-    navigate('/');
-  };
-
+const App = () => {
   return (
-    <div className="App">
-      <Navigation isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
+    <div>
+      <Header />
 
-      <Container className="mt-4">
-        <Routes>
-          <Route path="/" element={<Home isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/login" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
-          <Route path="/profile" element={<UserProfile />} />
-        </Routes>
-      </Container>
+      {/* Scrollbare Sektionen */}
+      <section id="start" className="section">
+        <h1>Willkommen</h1>
+        <p>Dies ist der Startbereich Ihrer Anwendung.</p>
+      </section>
+
+      <section id="shop" className="section">
+        <h1>Shop/Login</h1>
+        <p>Hier ist der Login-Bereich oder Shop-Inhalte.</p>
+      </section>
+
+      <section id="kontakt" className="section">
+        <h1>Kontakt</h1>
+        <p>Hier finden Sie das Kontaktformular.</p>
+      </section>
+
+      <section id="impressum" className="section">
+        <h1>Impressum</h1>
+        <p>Hier steht Ihr Impressum.</p>
+      </section>
+
+      <Footer />
     </div>
   );
-}
+};
 
 export default App;
