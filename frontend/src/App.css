@@ -4,6 +4,11 @@ body {
   scroll-behavior: smooth; /* Alternativ für Browser-Smooth-Scrolling */
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+
 /* Header Styling */
 .header {
   position: fixed;
@@ -37,6 +42,18 @@ body {
 
 .header nav button:hover {
   background-color: #0056b3;
+}
+
+.footer {
+  text-align: center; /* Zentriert den Text horizontal */
+  font-size: 10px; /* Schriftgröße auf 10px einstellen */
+  font-
+  background-color: #333; /* Optional: Hintergrundfarbe passend zum Header */
+  color: white; /* Textfarbe */
+  padding: 0px 0; /* Abstand oben und unten */
+  position: fixed; /* Fixiert den Footer unten */
+  width: 100%; /* Footer über die gesamte Breite */
+  bottom: 0; /* Footer immer am unteren Rand */
 }
 
 /* Sektionen Styling */
