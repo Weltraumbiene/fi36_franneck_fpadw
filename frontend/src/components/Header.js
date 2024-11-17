@@ -12,7 +12,7 @@ const Header = () => {
       <div className="logo">Autoteile24-intern</div>
       <nav>
         <button onClick={() => scrollToSection('shop')}>Login</button>
-        <button onClick={() => scrollToSection('kontakt')}>Kontakt</button>
+        <button onClick={() => scrollToSection('contact')}>Kontakt</button>
       </nav>
     </header>
   );

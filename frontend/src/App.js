@@ -6,7 +6,7 @@ import Home from './components/Home';
 import Shop from './components/Shop';
 import Contact from './components/Contact';
 import Imprint from './components/Imprint';
-import ScrollButtons from './components/ScrollButtons';  
+import ScrollButtons from './components/ScrollButtons';
 
 const App = () => {
   return (
@@ -16,9 +16,8 @@ const App = () => {
       <Shop />
       <Contact />
       <Imprint />
-      <ScrollButtons /> 
+      <ScrollButtons />
       <Footer />
- 
     </div>
   );
 };

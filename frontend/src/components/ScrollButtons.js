@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-scroll';
 import '../css/ScrollButtons.css';
 
@@ -8,7 +8,7 @@ const ScrollButtons = () => {
   const [timeoutId, setTimeoutId] = useState(null); // Zustand für Timeout-ID
 
   // Funktion um zu überprüfen, ob der Benutzer nach unten gescrollt hat
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     if (window.scrollY > 300) {
       setShowTopButton(true);
     } else {
@@ -31,7 +31,7 @@ const ScrollButtons = () => {
       setShowBottomButton(false);
     }, 1250); // Setze den Timeout auf 1 Sekunde
     setTimeoutId(id); // Speichere die Timeout-ID
-  };
+  }, [timeoutId]); // handleScroll verwendet timeoutId, also muss es als Abhängigkeit hinzugefügt werden
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
@@ -42,7 +42,7 @@ const ScrollButtons = () => {
         clearTimeout(timeoutId);
       }
     };
-  }, [timeoutId]); // Abhängig von timeoutId, damit der Timer immer aktualisiert wird
+  }, [handleScroll, timeoutId]); // handleScroll und timeoutId als Abhängigkeiten
 
   return (
     <>

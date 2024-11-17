@@ -1,0 +1,96 @@
+/* Allgemeines Layout und Styling */
+.contact-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Vertikale Zentrierung */
+    background-color: #f4f4f4; /* Hintergrundfarbe der Seite */
+    padding: 20px;
+}
+
+.contact-container {
+    width: 100%;
+    max-width: 600px; /* Maximale Breite des Formulars */
+    margin: 0 auto; /* Zentrieren des Formulars */
+}
+
+.contact-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); /* Sanfter Schatten */
+    padding: 30px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: all 0.3s ease-in-out;
+}
+
+.contact-card:hover {
+    transform: translateY(-5px); /* Leichter Hover-Effekt */
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2); /* Vergrößerter Schatten beim Hover */
+}
+
+/* Titel */
+.contact-card h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Formulareingabefelder */
+.contact-card label {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    display: block;
+    color: #555;
+}
+
+.contact-card input,
+.contact-card textarea {
+    font-size: 1rem;
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    transition: border-color 0.3s ease-in-out;
+}
+
+.contact-card input:focus,
+.contact-card textarea:focus {
+    border-color: #007bff; /* Farbe der Grenze bei Fokus */
+    outline: none; /* Entfernen des Standardrahmens */
+}
+
+/* Button */
+.contact-card button {
+    font-size: 1.1rem;
+    background-color: #007bff; /* Blaue Hintergrundfarbe */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 12px;
+    width: 100%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.contact-card button:hover {
+    background-color: #0056b3; /* Dunklerer Blauton beim Hover */
+}
+
+/* Statusmeldung */
+.contact-card p {
+    text-align: center;
+    font-size: 1rem;
+    color: #d9534f; /* Standard-Fehlermeldung */
+}
+
+.contact-card p.success {
+    color: #5bc0de; /* Erfolgreiche Nachricht */
+}
+
+.contact-card p.error {
+    color: #d9534f; /* Fehlermeldung */
+}
