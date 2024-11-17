@@ -11,7 +11,7 @@ const App = () => {
       {/* Scrollbare Sektionen */}
       <section id="start" className="section">
         <h1>Willkommen</h1>
-        <p>Dies ist der Startbereich Ihrer Anwendung.</p>
+        <p>Startbereich Anwendung</p>
       </section>
 
       <section id="shop" className="section">
