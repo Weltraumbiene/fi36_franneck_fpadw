@@ -9,7 +9,7 @@ const Header = () => {
 
   return (
     <header className="header">
-      <div className="logo">Das ist ein Test</div>
+      <div className="logo">Autoteile24-intern</div>
       <nav>
         <button onClick={() => scrollToSection('shop')}>Login</button>
         <button onClick={() => scrollToSection('kontakt')}>Kontakt</button>

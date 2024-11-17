@@ -6,7 +6,7 @@ import Home from './components/Home';
 import Shop from './components/Shop';
 import Contact from './components/Contact';
 import Imprint from './components/Imprint';
-import ScrollButtons from './components/ScrollButtons';  // Importiere die ScrollButtons-Komponente
+import ScrollButtons from './components/ScrollButtons';  
 
 const App = () => {
   return (
