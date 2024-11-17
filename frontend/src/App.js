@@ -6,19 +6,18 @@ import Home from './components/Home';
 import Shop from './components/Shop';
 import Contact from './components/Contact';
 import Imprint from './components/Imprint';
+import ScrollButtons from './components/ScrollButtons';  // Importiere die ScrollButtons-Komponente
 
 const App = () => {
   return (
-    <div>
+    <div className="App">
       <Header />
-
-      {/* Scrollbare Sektionen */}
       <Home />
       <Shop />
       <Contact />
       <Imprint />
-
       <Footer />
+      <ScrollButtons />  {/* Füge die ScrollButtons-Komponente ein */}
     </div>
   );
 };
