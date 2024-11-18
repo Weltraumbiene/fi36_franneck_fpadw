@@ -7,6 +7,10 @@ const app = express();
 
 app.use(express.json()); // Middleware für JSON Parsing in Anfragen
 
+import dotenv from 'dotenv';
+dotenv.config(); // Lädt die .env-Datei
+
+
 // CORS konfigurieren
 const corsOptions = {
     origin: ['http://localhost:3000', 'http://bcf.mshome.net:3000'], // Beide URLs erlauben

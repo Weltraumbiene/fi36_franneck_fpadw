@@ -21,7 +21,7 @@ const Header = () => {
       </div>
       <nav>
   <button onClick={() => scrollToSection('start')}>Start</button> {/* Von 'home' zu 'start' */}
-  <button onClick={() => scrollToSection('shop')}>Anmelden</button>
+  <button onClick={() => scrollToSection('login')}>Anmelden</button>
   <button onClick={() => scrollToSection('contact')}>Kontakt</button>
   <button onClick={() => scrollToSection('impressum')}>Impressum</button> {/* Von 'imprint' zu 'impressum' */}
 </nav>

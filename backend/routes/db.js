@@ -1,13 +1,15 @@
+// db.js
 import mariadb from 'mariadb';
-import secrets from './secrets.js';  
+import dotenv from 'dotenv';
 
+dotenv.config(); // Umgebungsvariablen laden
 
 const pool = mariadb.createPool({
-  host: secrets.db_server,
-  user: secrets.db_username,
-  password: secrets.db_password,
-  database: secrets.db_database,
-  connectionLimit: 5
+  host: process.env.DB_SERVER,
+  user: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE,
+  connectionLimit: 5,
 });
 
-export default pool;
+export default pool;  // Standard-Export des Pools
