@@ -24,11 +24,6 @@
     transition: all 0.3s ease-in-out;
 }
 
-.contact-card:hover {
-    transform: translateY(-5px); /* Leichter Hover-Effekt */
-    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2); /* Vergrößerter Schatten beim Hover */
-}
-
 /* Titel */
 .contact-card h2 {
     text-align: center;
@@ -93,4 +88,10 @@
 
 .contact-card p.error {
     color: #d9534f; /* Fehlermeldung */
+}
+
+.contact-card textarea {
+    resize: none; /* Verhindert Größenänderungen */
+    height: 200px; /* Höhe des Felds */
+    width: 100%; /* Volle Breite des Formulars */
 }
