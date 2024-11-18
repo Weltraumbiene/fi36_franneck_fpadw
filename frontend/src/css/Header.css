@@ -22,6 +22,7 @@
     margin: 0; /* Entfernt unnötige Abstände */
     line-height: 1.2; /* Optional: Passt Zeilenabstand an */
     display: inline-block; /* Für bessere Steuerung */
+    cursor: pointer;
   }
   
   

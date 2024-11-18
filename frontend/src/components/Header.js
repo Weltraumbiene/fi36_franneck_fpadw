@@ -1,19 +1,30 @@
-// src/components/Header.js
 import React from 'react';
 import '../css/Header.css';
 
 const Header = () => {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const scrollToSection = (id) => {
-    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
     <header className="header">
-      <div className="logo">Autoteile24-intern</div>
+      {/* Logo mit Klickfunktion */}
+      <div className="logo" onClick={scrollToTop}>
+        Autoteile24-intern
+      </div>
       <nav>
-        <button onClick={() => scrollToSection('shop')}>Login</button>
-        <button onClick={() => scrollToSection('contact')}>Kontakt</button>
-      </nav>
+  <button onClick={() => scrollToSection('start')}>Start</button> {/* Von 'home' zu 'start' */}
+  <button onClick={() => scrollToSection('shop')}>Anmelden</button>
+  <button onClick={() => scrollToSection('contact')}>Kontakt</button>
+  <button onClick={() => scrollToSection('impressum')}>Impressum</button> {/* Von 'imprint' zu 'impressum' */}
+</nav>
     </header>
   );
 };
