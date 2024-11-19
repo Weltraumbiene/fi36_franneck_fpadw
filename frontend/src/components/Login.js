@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Register from './Register'; // Importiere die Register-Komponente
-
 import '../css/Login.css';
 
 const Login = ({ setIsLoggedIn }) => {
@@ -13,7 +12,10 @@ const Login = ({ setIsLoggedIn }) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('/api/login', {
+      // Verbindung explizit herstellen
+      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:4000/api/login';
+
+      const response = await fetch(`${apiUrl}/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -24,10 +26,16 @@ const Login = ({ setIsLoggedIn }) => {
       const data = await response.json();
 
       if (response.ok) {
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('userId', data.userId);
+        // Speichere Token und Benutzer-ID in der Sitzung
+        sessionStorage.setItem('token', data.token);
+        sessionStorage.setItem('userId', data.userId);
+
         setIsLoggedIn(true);
         setMessage('Erfolgreich eingeloggt! Weiterleitung...');
+        // Optional: Weiterleitung nach Login
+        setTimeout(() => {
+          window.location.href = '/shop';
+        }, 1000);
       } else {
         setMessage(data.message || 'Login fehlgeschlagen');
       }
@@ -65,7 +73,6 @@ const Login = ({ setIsLoggedIn }) => {
             Anmelden
           </button>
         </form>
-        <br></br>
         <p className="register-link">
           Noch nicht registriert?{' '}
           <button
