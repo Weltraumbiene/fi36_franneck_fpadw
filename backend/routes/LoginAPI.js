@@ -49,7 +49,6 @@ router.post(
 
       // Verbindung zur DB herstellen und den Benutzer abfragen
       connection = await pool.getConnection();
-
       const result = await connection.query('SELECT * FROM user WHERE email = ?', [email]);
 
       if (result.length === 0) {

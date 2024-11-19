@@ -13,9 +13,9 @@ const Login = ({ setIsLoggedIn }) => {
 
     try {
       // Verbindung explizit herstellen
-      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:4000/api/login';
+      const apiUrl = 'http://bcf.mshome.net:4000/api/login';
 
-      const response = await fetch(`${apiUrl}/login`, {
+      const response = await fetch(`${apiUrl}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
