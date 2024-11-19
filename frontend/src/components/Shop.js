@@ -1,6 +1,16 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-const Shop = ({ isLoggedIn }) => {
+const Shop = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Zustand für den Login-Status
+
+  // Überprüfen, ob der Benutzer eingeloggt ist
+  useEffect(() => {
+    const token = sessionStorage.getItem('token'); // Token aus SessionStorage abrufen
+    if (token) {
+      setIsLoggedIn(true); // Nutzer ist eingeloggt
+    }
+  }, []); // Nur beim ersten Rendern prüfen
+
   return (
     <div>
       {isLoggedIn ? (
