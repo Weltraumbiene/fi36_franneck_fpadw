@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Register from './Register'; // Importiere die Register-Komponente
 import '../css/Login.css';
 
-const Login = ({ setIsLoggedIn }) => {
+const Login = ({ setIsLoggedIn, setCurrentPage }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -32,9 +32,8 @@ const Login = ({ setIsLoggedIn }) => {
 
         setIsLoggedIn(true);
         setMessage('Erfolgreich eingeloggt! Weiterleitung...');
-        // Optional: Weiterleitung nach Login
         setTimeout(() => {
-          window.location.href = '/shop';
+          setCurrentPage('shop'); // Wechsel zur Shop-Seite
         }, 1000);
       } else {
         setMessage(data.message || 'Login fehlgeschlagen');

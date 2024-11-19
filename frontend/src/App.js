@@ -7,20 +7,33 @@ import Login from './components/Login';
 import Shop from './components/Shop';
 import Contact from './components/Contact';
 import Imprint from './components/Imprint';
-import ScrollButtons from './components/ScrollButtons';
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Zustand für den Login-Status
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Login-Status
+  const [currentPage, setCurrentPage] = useState('home'); // Aktuelle Seite
+
+  const renderPage = () => {
+    switch (currentPage) {
+      case 'home':
+        return <Home />;
+      case 'login':
+        return <Login setIsLoggedIn={setIsLoggedIn} setCurrentPage={setCurrentPage} />; // `setCurrentPage` übergeben
+      case 'shop':
+        return <Shop isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />;
+      case 'contact':
+        return <Contact />;
+      case 'imprint':
+        return <Imprint />;
+      default:
+        return <Home />;
+    }
+  };
+  
 
   return (
     <div className="App">
-      <Header />
-      <Home />
-      <Login setIsLoggedIn={setIsLoggedIn} /> {/* Funktion als Prop übergeben */}
-      <Shop isLoggedIn={isLoggedIn} /> {/* Login-Status an Shop weitergeben */}
-      <Contact />
-      <Imprint />
-      <ScrollButtons />
+      <Header setCurrentPage={setCurrentPage} />
+      {renderPage()}
       <Footer />
     </div>
   );

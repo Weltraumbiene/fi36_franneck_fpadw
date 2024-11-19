@@ -1,0 +1,36 @@
+.shop-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Zentriert den Inhalt vertikal */
+    align-items: center; /* Zentriert den Inhalt horizontal */
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    height: 100vh; /* Stellt sicher, dass die Container-Höhe 100% der Bildschirmhöhe ist */
+  }
+    
+  .shop-container p {
+    font-size: 1.2rem;
+    color: #333;
+  }
+  
+  .logout-button {
+    background-color: #e53935; /* Rot */
+    color: #fff; /* Weiße Schrift */
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .logout-button:hover {
+    background-color: #d32f2f; /* Dunkleres Rot beim Hover */
+  }
+  

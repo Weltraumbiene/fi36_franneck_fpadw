@@ -1,30 +1,19 @@
 import React from 'react';
 import '../css/Header.css';
 
-const Header = () => {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const scrollToSection = (id) => {
-    const section = document.getElementById(id);
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
+const Header = ({ setCurrentPage }) => {
   return (
     <header className="header">
-      {/* Logo mit Klickfunktion */}
-      <div className="logo" onClick={scrollToTop}>
+      <div className="logo" onClick={() => setCurrentPage('home')}>
         Autoteile24-intern
       </div>
       <nav>
-  <button onClick={() => scrollToSection('start')}>Start</button> {/* Von 'home' zu 'start' */}
-  <button onClick={() => scrollToSection('login')}>Anmelden</button>
-  <button onClick={() => scrollToSection('contact')}>Kontakt</button>
-  <button onClick={() => scrollToSection('impressum')}>Impressum</button> {/* Von 'imprint' zu 'impressum' */}
-</nav>
+        <button onClick={() => setCurrentPage('home')}>Start</button>
+        <button onClick={() => setCurrentPage('login')}>Anmelden</button>
+        <button onClick={() => setCurrentPage('shop')}>Shop</button>
+        <button onClick={() => setCurrentPage('contact')}>Kontakt</button>
+        <button onClick={() => setCurrentPage('imprint')}>Impressum</button>
+      </nav>
     </header>
   );
 };
