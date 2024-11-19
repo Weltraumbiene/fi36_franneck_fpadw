@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import '../css/Login.css'; // Verweis auf das ausgelagerte CSS
+import Register from './Register'; // Importiere die Register-Komponente
+
+import '../css/Login.css';
 
 const Login = ({ setIsLoggedIn }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
-  const navigate = useNavigate();
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,12 +24,10 @@ const Login = ({ setIsLoggedIn }) => {
       const data = await response.json();
 
       if (response.ok) {
-        // Token speichern und weiterleiten
         localStorage.setItem('token', data.token);
         localStorage.setItem('userId', data.userId);
         setIsLoggedIn(true);
         setMessage('Erfolgreich eingeloggt! Weiterleitung...');
-        setTimeout(() => navigate('/'), 4000);
       } else {
         setMessage(data.message || 'Login fehlgeschlagen');
       }
@@ -66,11 +65,22 @@ const Login = ({ setIsLoggedIn }) => {
             Anmelden
           </button>
         </form>
+        <br></br>
         <p className="register-link">
           Noch nicht registriert?{' '}
-          <Link to="/register">Hier klicken, um sich zu registrieren!</Link>
+          <button
+            type="button"
+            className="open-register-modal-button"
+            onClick={() => setShowRegisterModal(true)}
+          >
+            Hier klicken, um sich zu registrieren!
+          </button>
         </p>
       </div>
+
+      {showRegisterModal && (
+        <Register onClose={() => setShowRegisterModal(false)} />
+      )}
     </section>
   );
 };

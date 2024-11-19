@@ -10,15 +10,13 @@ app.use(express.json()); // Middleware für JSON Parsing in Anfragen
 import dotenv from 'dotenv';
 dotenv.config(); // Lädt die .env-Datei
 
-
 // CORS konfigurieren
 const corsOptions = {
     origin: ['http://localhost:3000', 'http://bcf.mshome.net:3000'], // Beide URLs erlauben
     methods: 'GET,POST,PUT,DELETE',
     allowedHeaders: 'Content-Type,Authorization',
-  };
-  app.use(cors(corsOptions));
-  
+};
+app.use(cors(corsOptions)); // Diese Zeile sorgt dafür, dass CORS auf alle Routen angewendet wird
 
 // Haupt-Route für die Basis-URL
 app.get('/', (req, res) => {

@@ -1,21 +1,25 @@
 import React, { useState } from 'react';
-import '../css/Register.css'; // Verweis auf das CSS für Register
+import '../css/Register.css';
 
-const Register = () => {
+const Register = ({ onClose }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [message, setMessage] = useState('');
+  const [status, setStatus] = useState('');
 
+  // Formular-Submit-Handler
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Passwort-Überprüfung
     if (password !== confirmPassword) {
-      setMessage('Passwörter stimmen nicht überein.');
+      setStatus('Passwörter stimmen nicht überein.');
       return;
     }
 
+    // API-Anfrage senden
     try {
-      const response = await fetch('/api/register', {
+      const response = await fetch('http://bcf.mshome.net:4000/api/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -26,21 +30,37 @@ const Register = () => {
       const data = await response.json();
 
       if (response.ok) {
-        setMessage('Erfolgreich registriert! Sie können sich nun anmelden.');
+        setStatus(
+          <>
+            Erfolgreich registriert!<br />
+            Sie können sich nun dieses Fenster schließen und sich anmelden.
+          </>
+        );
+        setEmail('');
+        setPassword('');
+        setConfirmPassword('');
       } else {
-        setMessage(data.message || 'Registrierung fehlgeschlagen.');
+        setStatus(data.message || 'Registrierung fehlgeschlagen.');
       }
     } catch (error) {
-      console.error('Fehler bei der Registrierung:', error);
-      setMessage('Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.');
+      setStatus('Fehler beim Registrieren. Bitte versuche es erneut.');
     }
   };
 
   return (
-    <section id="register" className="register-section">
-      <div className="register-container">
+    // Modal Overlay
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        {/* Schließen-Button */}
+        <button className="close-button" onClick={onClose}>
+          &times;
+        </button>
         <h1>Registrieren</h1>
-        {message && <div className="register-message">{message}</div>}
+
+        {/* Statusnachricht */}
+        {status && <div className="register-message">{status}</div>}
+
+        {/* Formular */}
         <form onSubmit={handleSubmit} className="register-form">
           <label htmlFor="email">E-Mail</label>
           <input
@@ -51,6 +71,7 @@ const Register = () => {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
+          
           <label htmlFor="password">Passwort</label>
           <input
             id="password"
@@ -60,6 +81,7 @@ const Register = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+          
           <label htmlFor="confirmPassword">Passwort bestätigen</label>
           <input
             id="confirmPassword"
@@ -69,12 +91,13 @@ const Register = () => {
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
+
           <button type="submit" className="register-button">
             Registrieren
           </button>
         </form>
       </div>
-    </section>
+    </div>
   );
 };
 
