@@ -11,7 +11,28 @@ const Register = ({ onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Passwort-Überprüfung
+    // E-Mail-Validierung
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setStatus('Bitte eine gültige E-Mail-Adresse eingeben.');
+      return;
+    }
+
+    if (!email.endsWith('@at24intern.de')) {
+      setStatus('Nur firmeneigene E-Mail-Adressen sind erlaubt.');
+      return;
+    }
+
+    // Passwort-Validierung
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@$%?])[A-Za-z\d!@$%?]{8,}$/;
+    if (!passwordRegex.test(password)) {
+      setStatus(
+        'Das Passwort muss mindestens 8 Zeichen lang sein, einen Großbuchstaben, eine Zahl und ein Sonderzeichen (!@$%?) enthalten.'
+      );
+      return;
+    }
+
+    // Passwort-Bestätigung
     if (password !== confirmPassword) {
       setStatus('Passwörter stimmen nicht überein.');
       return;
@@ -33,7 +54,7 @@ const Register = ({ onClose }) => {
         setStatus(
           <>
             Erfolgreich registriert!<br />
-            Sie können sich nun dieses Fenster schließen und sich anmelden.
+            Sie können dieses Fenster schließen und sich anmelden.
           </>
         );
         setEmail('');
@@ -71,7 +92,7 @@ const Register = ({ onClose }) => {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          
+
           <label htmlFor="password">Passwort</label>
           <input
             id="password"
@@ -81,7 +102,7 @@ const Register = ({ onClose }) => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          
+
           <label htmlFor="confirmPassword">Passwort bestätigen</label>
           <input
             id="confirmPassword"
