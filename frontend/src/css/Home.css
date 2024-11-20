@@ -14,4 +14,34 @@
     align-items: center;
     text-align: center;
   }
+  #start {
+    height: 100vh; /* Die Sektion nimmt den gesamten Viewport ein */
+    color: white; /* Textfarbe für bessere Lesbarkeit */
+    padding: 20px; /* Innerer Abstand */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #000; /* Fallback-Hintergrund, falls Bilder nicht geladen werden */
+  }
+  
+  .slideshow-container {
+    position: relative;
+    width: 100%;
+    height: 70%; /* Höhe des Bildbereichs */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 10px; /* Optional: abgerundete Ecken */
+    margin-bottom: 20px;
+  }
+  
+  .slideshow-image {
+    width: 50%;
+    height: 100%;
+    object-fit: cover; /* Bilder werden skaliert, um den Container zu füllen */
+    transition: opacity 1s ease-in-out; /* Weicher Übergang */
+  }
   
