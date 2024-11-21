@@ -9,7 +9,7 @@ body {
 .shop-container {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* Inhalt oben ausrichten */
+  justify-content: center; /* Zentriert den Inhalt vertikal */
   align-items: center; /* Zentriert den Inhalt horizontal */
   padding: 20px 20px 40px; /* Padding oben und unten anpassen */
   max-width: 100%; /* Dynamische Breite */
@@ -21,12 +21,46 @@ body {
   border-radius: 0px;
   box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1);
   min-height: 100vh; /* Mindestens die Höhe des Bildschirms */
+  position: relative;
 }
 
-/* Text und andere Inhalte */
+/* Styling für den Login-Hinweis, wenn der Benutzer nicht eingeloggt ist */
+.login-prompt {
+  background-color: transparent; /* Kein Hintergrund */
+  color: #333; /* Dunkelgraue Schriftfarbe */
+  font-size: 1.2rem;
+  text-align: center; /* Text zentrieren */
+  margin: 0; /* Entfernt den Abstand */
+  padding: 0; /* Entfernt Padding */
+  white-space: normal; /* Ermöglicht Zeilenumbrüche */
+  overflow: visible; /* Verhindert das Abschneiden von Text */
+}
+
+
+/* Button-Styling für den Login-Button */
+.login-button {
+  background-color: #007bff; /* Blau wie der Login-Button */
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px; /* Abstand nach oben */
+}
+
+.login-button:hover {
+  background-color: #0056b3; /* Dunkleres Blau beim Hover */
+}
+
 .shop-container p {
   font-size: 1.2rem;
-  color: #333; /* Standard-Textfarbe */
+  color: #333;
+  text-align: center; /* Falls du den Text zentrieren möchtest */
+  margin: 0; /* Kein Abstand */
+  width: auto; /* Entfernt die feste Breite */
+  max-width: none; /* Entfernt die Maximalbreite */
 }
 
 /* Grid-Darstellung der Produktkarten */

@@ -1,45 +1,54 @@
+/* Allgemeines Layout */
 .section {
-    padding: 40px;
-    text-align: center;
-  }
-  
-  .imprint-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-  }
-  
-  .imprint-box {
-    background-color: #f0f0f0; /* Hellgrauer Hintergrund */
-    border-radius: 10px; /* Abgerundete Ecken */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Schatten */
-    padding: 20px;
-    width: 300px; /* Festgelegte Breite */
-    text-align: left; /* Text linksbündig */
-  }
-  
-  .imprint-box h2 {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-  }
-  
-  .imprint-box p {
-    margin: 5px 0;
-    font-size: 0.9rem; /* Schriftgröße etwas kleiner */
-    color: #000; /* Schwarzer Text */
-  }
-  
-  .imprint-box a {
-    color: #000; /* Links in Schwarz */
-    text-decoration: none; /* Keine Unterstreichung */
-  }
-  
-  .imprint-box a:hover {
-    color: #555; /* Mouseover-Effekt für Links */
-  }
-  
-  .imprint-box:hover {
-    background-color: #e0e0e0; /* Mouseover-Effekt für Boxen */
-  }
-  
+  padding: 30px; /* Weniger Padding für eine kompaktere Darstellung */
+  text-align: center;
+  background-color: #f4f4f4; /* Hellgrauer Hintergrund passend zum allgemeinen Design */
+}
+
+/* Imprint Container */
+.imprint-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px; /* Etwas kleinerer Abstand zwischen den Boxen */
+}
+
+/* Imprint Box */
+.imprint-box {
+  background-color: white; /* Weiße Hintergrundfarbe für die Boxen */
+  border-radius: 8px; /* Kleinere abgerundete Ecken */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Schatten */
+  padding: 15px; /* Weniger Padding für kompaktere Boxen */
+  width: 250px; /* Kleinere Breite für kompaktere Boxen */
+  text-align: left; /* Text linksbündig */
+  transition: all 0.3s ease-in-out;
+}
+
+/* Imprint Box Titel */
+.imprint-box h2 {
+  font-size: 1.1rem; /* Etwas kleinere Schriftgröße für den Titel */
+  margin-bottom: 8px; /* Reduzierter Abstand zum nächsten Text */
+}
+
+/* Imprint Box Paragraph */
+.imprint-box p {
+  margin: 4px 0; /* Kleinerer Abstand zwischen den Textabsätzen */
+  font-size: 0.85rem; /* Kleinere Schriftgröße für den Text */
+  color: #000; /* Schwarzer Text */
+}
+
+/* Imprint Box Links */
+.imprint-box a {
+  color: #000; /* Links in Schwarz */
+  text-decoration: none; /* Keine Unterstreichung */
+  font-size: 0.9rem; /* Kleinere Schriftgröße für Links */
+}
+
+.imprint-box a:hover {
+  color: #555; /* Mouseover-Effekt für Links */
+}
+
+/* Imprint Box Hover-Effekt */
+.imprint-box:hover {
+  background-color: #e0e0e0; /* Mouseover-Effekt für Boxen */
+}

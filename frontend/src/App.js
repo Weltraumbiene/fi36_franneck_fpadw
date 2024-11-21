@@ -19,7 +19,7 @@ const App = () => {
       case 'login':
         return <Login setIsLoggedIn={setIsLoggedIn} setCurrentPage={setCurrentPage} />; // `setCurrentPage` übergeben
       case 'shop':
-        return <Shop isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />;
+        return <Shop isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setCurrentPage={setCurrentPage} />;
       case 'contact':
         return <Contact />;
       case 'imprint':
@@ -28,7 +28,6 @@ const App = () => {
         return <Home />;
     }
   };
-  
 
   return (
     <div className="App">
