@@ -24,39 +24,64 @@ body {
   position: relative;
 }
 
-/* Container für die Buttons (Abmelden und Warenkorb) */
+/* Container für die Buttons (Warenkorb, Zur Kasse, Abmelden) */
 .button-container {
   display: flex;
-  justify-content: space-between; /* Platz zwischen den Buttons */
-  width: 100%; /* Setzt die Breite auf 100% des übergeordneten Containers */
-  max-width: 400px; /* Maximale Breite der Button-Leiste */
+  justify-content: center; /* Buttons werden jetzt mittig ausgerichtet */
+  width: 100%; /* Setze die Breite auf 100%, damit die Buttons den gesamten Platz einnehmen */
+  max-width: 500px; /* Maximale Breite der Button-Leiste */
   margin-top: 20px; /* Abstand nach oben */
 }
 
-/* Button-Styling für den Login-Button */
-.login-button, .logout-button, .cart-button {
+/* Button-Styling für Warenkorb, Zur Kasse, Abmelden */
+.login-button, .logout-button, .cart-button, .checkout-button {
   background-color: #007bff; /* Blau wie der Login-Button */
   color: white;
-  padding: 12px;
+  padding: 10px 20px; /* Etwas breitere Buttons */
   border: none;
   border-radius: 5px;
-  font-size: 1.1rem;
+  font-size: 0.9rem; /* Kleinere Schriftgröße */
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin: 0 10px; /* Abstand zwischen den Buttons */
+  margin: 0 5px; /* Abstand zwischen den Buttons (5px links und rechts) */
 }
 
-.login-button:hover, .logout-button:hover, .cart-button:hover {
+/* Hover-Effekte für die Buttons */
+.login-button:hover, .logout-button:hover, .cart-button:hover, .checkout-button:hover {
   background-color: #0056b3; /* Dunkleres Blau beim Hover */
+}
+
+/* Warenkorb Button links */
+.cart-button {
+  order: 1; /* Setzt den Warenkorb-Button zuerst */
+}
+
+/* Zur Kasse Button */
+.checkout-button {
+  background-color: #28a745; /* Grüner Hintergrund */
+}
+
+.checkout-button:hover {
+  background-color: #218838; /* Dunkleres Grün beim Hover */
+}
+
+/* Abmelden Button rechts */
+.logout-button {
+  order: 2; /* Setzt den Abmelden-Button an das Ende */
+  background-color: #f44336; /* Roter Hintergrund für den Abmelden-Button */
+}
+
+.logout-button:hover {
+  background-color: #d32f2f; /* Dunkleres Rot beim Hover */
 }
 
 /* Grid-Darstellung der Produktkarten */
 .product-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* 3 Spalten */
-  gap: 20px;
+  gap: 10px 5px; /* 10px horizontaler Abstand, 5px vertikaler Abstand */
   margin-top: 20px;
-  width: 100%;
+  width: 50%;
   justify-items: center;
 }
 
@@ -75,10 +100,26 @@ body {
   transform: scale(1.05);
 }
 
+/* Kleinere Bilder im Grid */
 .product-image {
-  max-width: 100%;
-  height: auto;
+  width: 120px; /* Kleinere Breite */
+  height: 120px; /* Kleinere Höhe */
+  object-fit: cover; /* Bild wird korrekt skaliert */
   border-radius: 5px;
+}
+
+/* Produkt-Titel */
+.product-title {
+  font-size: 1.0em; /* Hier wird die Schriftgröße festgelegt */
+  margin: 10px 0; /* Abstand zwischen Titel und Beschreibung */
+  color: #333; /* Farbwahl für den Titel */
+}
+
+/* Produkt-Preis */
+.product-price {
+  font-size: 0.7em; /* Hier wird die Schriftgröße für den Preis festgelegt */
+  color: #313131; /* Blau für den Preis */
+  margin-top: 10px;
 }
 
 /* Modal-Overlay */
@@ -89,15 +130,15 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
-  justify-content: center;
-  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5); /* Dunkler Hintergrund */
+  z-index: 1000; /* Damit das Modal über anderen Inhalten liegt */
+  justify-content: center;  /* Zentriert den Inhalt horizontal */
+  align-items: center;      /* Zentriert den Inhalt vertikal */
   padding: 20px;
 }
 
 .modal-overlay.show {
-  display: flex;
+  display: flex; /* Modal anzeigen */
 }
 
 /* Modal-Inhalt */
@@ -105,10 +146,18 @@ body {
   background-color: white;
   padding: 20px;
   border-radius: 8px;
-  max-width: 500px;
+  max-width: 600px;  /* Maximale Breite erhöhen */
   width: 100%;
   text-align: center;
   position: relative;
+}
+
+/* Bildgröße im Modal */
+.modal-content .product-image {
+  width: 400px;  /* Breite erhöhen */
+  height: 400px; /* Höhe erhöhen */
+  object-fit: cover;  /* Das Bild wird proportional skaliert */
+  margin: 0 auto;  /* Bild mittig im Modal */
 }
 
 /* Schließen Button im Modal */
@@ -174,4 +223,21 @@ body {
 
 .close-cart-button:hover {
   background-color: #d32f2f;
+}
+
+/* Button zum Hinzufügen zum Warenkorb im Modal */
+.modal-content .shop-button {
+  background-color: #007bff; /* Blau wie der Login-Button */
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px; /* Abstand nach oben */
+}
+
+.modal-content .shop-button:hover {
+  background-color: #0056b3; /* Dunkleres Blau beim Hover */
 }

@@ -68,13 +68,32 @@ const Shop = ({ isLoggedIn, setIsLoggedIn, setCurrentPage }) => {
         setModalProduct(null);
     };
 
-    // Funktion zum Hinzufügen eines Produkts zum Warenkorb
-    const addToCart = () => {
-        if (modalProduct) {
-            setCart([...cart, modalProduct]);
-            closeModal(); // Schließe das Modal nach dem Hinzufügen
+// Funktion zum Hinzufügen eines Produkts zum Warenkorb
+const addToCart = () => {
+    if (modalProduct && modalProduct.quantity > 0) {
+        // Produkt wird zum Warenkorb hinzugefügt
+        const updatedCart = [...cart];
+        const productIndex = updatedCart.findIndex(item => item.product_id === modalProduct.product_id);
+
+        if (productIndex !== -1) {
+            // Wenn das Produkt bereits im Warenkorb ist, erhöhe die Menge
+            updatedCart[productIndex].quantity += 1;
+        } else {
+            // Wenn das Produkt noch nicht im Warenkorb ist, füge es hinzu
+            updatedCart.push({ ...modalProduct, quantity: 1 });
         }
-    };
+
+        // Setze den Warenkorb mit dem aktualisierten Zustand
+        setCart(updatedCart);
+
+        // Verringere die Menge des Produkts
+        const updatedProduct = { ...modalProduct, quantity: modalProduct.quantity - 1 };
+        setModalProduct(updatedProduct); // Aktualisiere das Modal-Produkt
+
+        closeModal(); // Schließe das Modal nach dem Hinzufügen
+    }
+};
+
 
     // Funktion zum Öffnen des Warenkorb-Modals
     const openCartModal = () => {
@@ -94,11 +113,14 @@ const Shop = ({ isLoggedIn, setIsLoggedIn, setCurrentPage }) => {
 
                     {/* Buttons nebeneinander */}
                     <div className="button-container">
-                        <button className="logout-button" onClick={handleLogout}>
-                            Abmelden
-                        </button>
                         <button className="cart-button" onClick={openCartModal}>
                             Warenkorb ({cart.length})
+                        </button>
+                        <button className="checkout-button">
+                            Zur Kasse
+                        </button>
+                        <button className="logout-button" onClick={handleLogout}>
+                            Abmelden
                         </button>
                     </div>
 
@@ -149,37 +171,39 @@ const Shop = ({ isLoggedIn, setIsLoggedIn, setCurrentPage }) => {
                     )}
 
                     {/* Warenkorb-Modal */}
-                    {showCartModal && (
-                        <div className="cart-modal-overlay show">
-                            <div className="cart-modal-content">
-                                <button className="cart-modal-close" onClick={closeCartModal}>
-                                    ×
-                                </button>
-                                <h2>Warenkorb</h2>
-                                {cart.length === 0 ? (
-                                    <p>Der Warenkorb ist leer.</p>
-                                ) : (
-                                    <ul>
-                                        {cart.map((item, index) => (
-                                            <li key={index}>
-                                                <img
-                                                    src={item.image}
-                                                    alt={item.title}
-                                                    className="product-image"
-                                                    style={{ width: '50px', height: '50px' }}
-                                                />
-                                                <span>{item.title}</span>
-                                                <span> x {item.quantity}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                )}
-                                <button className="close-cart-button" onClick={closeCartModal}>
-                                    Schließen
-                                </button>
-                            </div>
-                        </div>
-                    )}
+{/* Warenkorb-Modal */}
+{showCartModal && (
+    <div className="cart-modal-overlay show">
+        <div className="cart-modal-content">
+            <button className="cart-modal-close" onClick={closeCartModal}>
+                ×
+            </button>
+            <h2>Warenkorb</h2>
+            {cart.length === 0 ? (
+                <p>Der Warenkorb ist leer.</p>
+            ) : (
+                <ul>
+                    {cart.map((item, index) => (
+                        <li key={index}>
+                            <img
+                                src={item.image}
+                                alt={item.title}
+                                className="product-image"
+                                style={{ width: '50px', height: '50px' }}
+                            />
+                            <span>{item.title}</span>
+                            <span> x {item.quantity}</span>
+                        </li>
+                    ))}
+                </ul>
+            )}
+            <button className="close-cart-button" onClick={closeCartModal}>
+                Schließen
+            </button>
+        </div>
+    </div>
+)}
+
                 </>
             ) : (
                 <div>
