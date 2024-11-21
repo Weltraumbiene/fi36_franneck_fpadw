@@ -1,5 +1,3 @@
-// ShopAPI.js Backend
-
 import express from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
@@ -18,19 +16,62 @@ const pool = mariadb.createPool({
   connectionLimit: 5
 });
 
+// Abrufen der Produkte
 router.get('/api/products', async (req, res) => {
     try {
-      const connection = await pool.getConnection();
-      const products = await connection.query('SELECT * FROM product');
-      connection.release();
+        const connection = await pool.getConnection();
+        const products = await connection.query('SELECT * FROM product');
+        connection.release();
   
-      res.setHeader('Content-Type', 'application/json'); // Setzt den Content-Type-Header
-      res.json(products); // Gibt die Produkte als JSON zurück
+        res.setHeader('Content-Type', 'application/json');
+        res.json(products); // Gibt die Produkte als JSON zurück
     } catch (error) {
-      console.error('Fehler beim Abrufen der Produkte:', error);
-  
-      res.status(500).json({ error: 'Fehler beim Abrufen der Produkte' }); // Setzt ebenfalls JSON im Fehlerfall
+        console.error('Fehler beim Abrufen der Produkte:', error);
+        res.status(500).json({ error: 'Fehler beim Abrufen der Produkte' });
     }
-  });
-  
-  
+});
+
+// Warenkorb in der Session speichern (wenn der Benutzer eingeloggt ist)
+router.post('/api/cart', (req, res) => {
+    if (!req.session.cart) {
+        req.session.cart = [];
+    }
+
+    const { productId, quantity } = req.body;
+
+    // Produkt zum Warenkorb hinzufügen
+    req.session.cart.push({ productId, quantity });
+
+    res.status(200).json({ message: 'Produkt zum Warenkorb hinzugefügt' });
+});
+
+// Bestellübersicht nach Abschluss
+router.post('/api/order', async (req, res) => {
+    if (!req.session.cart || req.session.cart.length === 0) {
+        return res.status(400).json({ error: 'Warenkorb ist leer' });
+    }
+
+    const { userId } = req.body;
+    try {
+        const connection = await pool.getConnection();
+        const orderResult = await connection.query('INSERT INTO `order` (user_id) VALUES (?)', [userId]);
+        const orderId = orderResult.insertId;
+
+        // Bestellpositionen speichern
+        for (let item of req.session.cart) {
+            await connection.query('INSERT INTO `order_item` (order_id, product_id, quantity) VALUES (?, ?, ?)', 
+                                    [orderId, item.productId, item.quantity]);
+        }
+
+        // Leere den Warenkorb
+        req.session.cart = [];
+        connection.release();
+
+        res.status(200).json({ message: 'Bestellung erfolgreich' });
+    } catch (error) {
+        console.error('Fehler bei der Bestellung:', error);
+        res.status(500).json({ error: 'Fehler bei der Bestellung' });
+    }
+});
+
+export default router;

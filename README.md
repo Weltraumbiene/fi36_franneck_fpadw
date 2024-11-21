@@ -117,10 +117,9 @@ Der Shop-Container war anfangs nicht optimal gestylt und sah ziemlich leer aus. 
 
 Am Ende des Tages funktionierte alles ziemlich gut. Die Login-Funktion wurde richtig integriert, der Shop wurde nur angezeigt, wenn der Benutzer eingeloggt war, und der Logout-Button tut genau das, was er soll. Ich habe gelernt, wie wichtig es ist, den Zustand in einer React-App richtig zu verwalten und wie man CORS-Probleme in den Griff bekommt, wenn man mit APIs arbeitet.
 
-20.11.2024
+20.11.2024 und 21.11.2024
 Passwortvalidierung angepasst. Bei der Registrierung werden jetzt nur interne Emailadressen (beispiel@at24intern.de) zugelassen. außerdem muss das passwort bestimmten Vorraussetzungen entsprechen: Ein Großbuchstabe, eine Zahl, ein Sonderzeichen und mindestens acht Zeichen lang.
 
-21.11.2024
 Heute habe ich viel versucht, um den Shop und die Login-Funktion zum Laufen zu bringen. Zuerst habe ich mich mit dem Shop beschäftigt, bei dem es darum ging, Produkte von der API abzurufen. Leider bekam ich immer die Fehlermeldung „Fehler beim Laden der Produkte“. Also habe ich den Code für die Shop-API überprüft und sichergestellt, dass der Token korrekt an die API übergeben wird. Aber das Problem blieb, und ich bekam weiterhin Fehler mit dem Token. Also musste ich mich der Middleware widmen.
 
 In der Middleware ging es darum, das Token zu verifizieren, bevor ich auf die Shop-Daten zugreifen kann. Ich baute eine Funktion ein, die sicherstellt, dass der Token korrekt übergeben wird und valide ist. Als ich dachte, das Problem mit den Produkten sei nun gelöst, fing der Login an zu spinnen.
