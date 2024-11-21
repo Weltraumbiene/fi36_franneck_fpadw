@@ -116,3 +116,20 @@ In der Shop-Komponente war es anfangs so, dass der Benutzer einfach eingeloggt s
 Der Shop-Container war anfangs nicht optimal gestylt und sah ziemlich leer aus. Also habe ich ihn mit ein paar CSS-Regeln zentriert, damit der Inhalt schön in der Mitte der Seite angezeigt wird. Dabei habe ich auch den Logout-Button angepasst und ihn rot gemacht, mit weißer Schrift, um ihn visuell hervorzuheben.
 
 Am Ende des Tages funktionierte alles ziemlich gut. Die Login-Funktion wurde richtig integriert, der Shop wurde nur angezeigt, wenn der Benutzer eingeloggt war, und der Logout-Button tut genau das, was er soll. Ich habe gelernt, wie wichtig es ist, den Zustand in einer React-App richtig zu verwalten und wie man CORS-Probleme in den Griff bekommt, wenn man mit APIs arbeitet.
+
+20.11.2024
+Passwortvalidierung angepasst. Bei der Registrierung werden jetzt nur interne Emailadressen (beispiel@at24intern.de) zugelassen. außerdem muss das passwort bestimmten Vorraussetzungen entsprechen: Ein Großbuchstabe, eine Zahl, ein Sonderzeichen und mindestens acht Zeichen lang.
+
+21.11.2024
+Heute habe ich viel versucht, um den Shop und die Login-Funktion zum Laufen zu bringen. Zuerst habe ich mich mit dem Shop beschäftigt, bei dem es darum ging, Produkte von der API abzurufen. Leider bekam ich immer die Fehlermeldung „Fehler beim Laden der Produkte“. Also habe ich den Code für die Shop-API überprüft und sichergestellt, dass der Token korrekt an die API übergeben wird. Aber das Problem blieb, und ich bekam weiterhin Fehler mit dem Token. Also musste ich mich der Middleware widmen.
+
+In der Middleware ging es darum, das Token zu verifizieren, bevor ich auf die Shop-Daten zugreifen kann. Ich baute eine Funktion ein, die sicherstellt, dass der Token korrekt übergeben wird und valide ist. Als ich dachte, das Problem mit den Produkten sei nun gelöst, fing der Login an zu spinnen.
+
+Ich hatte Probleme mit der Login-API. Als ich den Code überprüfte, stellte sich heraus, dass ein kleiner Fehler vorlag. Ich versuchte, den Login-Flow zu debuggen, aber die Kommunikation mit der Datenbank lief nicht richtig, was dazu führte, dass ich ständig auf Fehlermeldungen stieß. Es war frustrierend, weil jeder Schritt, den ich machte, mehr Fehler nach sich zog.
+
+Am Ende des Tages war ich ziemlich erschöpft von all den Problemen und hatte das Gefühl, dass ich keine klaren Lösungen für die vielen Fehler gefunden habe. Es gab so viele einzelne Punkte, die nicht zusammenpassten, und es war schwer, alles zu koordinieren.
+Als ich das getestet habe, funktionierte die Anzeige der Produktdetails wie gewünscht – allerdings wurden die Produktbilder viel zu groß dargestellt.
+
+Um das zu lösen, habe ich mich mit dem CSS beschäftigt und die Größe der Bilder angepasst, damit sie als kleine Thumbnails angezeigt werden. Ich habe die maximale Breite der Bilder auf 150px gesetzt, sodass sie immer klein und gut proportioniert bleiben. Damit das Seitenverhältnis der Bilder nicht verzerrt wird, habe ich auch dafür gesorgt, dass die Höhe automatisch angepasst wird.
+
+Abschließend habe ich noch das Layout angepasst, sodass die Produkte in einem grid-Layout angezeigt werden, das sich automatisch an die Bildschirmgröße anpasst und die Produkte in einer ansprechenden Weise anzeigt – in drei Spalten, wenn genug Platz ist.
