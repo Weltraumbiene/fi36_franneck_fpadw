@@ -12,7 +12,7 @@ const Shop = ({ isLoggedIn, setIsLoggedIn, setCurrentPage }) => {
     useEffect(() => {
         const token = sessionStorage.getItem('token');
         if (!token) {
-            setIsLoggedIn(false);  // Setze den Login-Status auf false, wenn kein Token gefunden wird
+            setIsLoggedIn(false); // Setze den Login-Status auf false, wenn kein Token gefunden wird
         } else {
             setIsLoggedIn(true); // Falls Token vorhanden ist, setze den Login-Status auf true
         }
@@ -21,7 +21,7 @@ const Shop = ({ isLoggedIn, setIsLoggedIn, setCurrentPage }) => {
     // Produkte abrufen, wenn der Benutzer eingeloggt ist
     useEffect(() => {
         const fetchProducts = async () => {
-            if (!isLoggedIn) return;  // Verhindert das Abrufen von Produkten, wenn der Benutzer nicht eingeloggt ist
+            if (!isLoggedIn) return; // Verhindert das Abrufen von Produkten, wenn der Benutzer nicht eingeloggt ist
 
             try {
                 const response = await fetch('http://bcf.mshome.net:4000/api/products');
@@ -40,23 +40,13 @@ const Shop = ({ isLoggedIn, setIsLoggedIn, setCurrentPage }) => {
     const handleLogout = () => {
         sessionStorage.removeItem('token');
         sessionStorage.removeItem('userId');
-        setIsLoggedIn(false);  // Setzt den Login-Status auf false
+        setIsLoggedIn(false); // Setzt den Login-Status auf false
     };
 
     // Funktion für das Weiterleiten zur Login-Seite
     const redirectToLogin = () => {
-        setCurrentPage('login');  // Ändere die aktuelle Seite auf 'login'
+        setCurrentPage('login'); // Ändere die aktuelle Seite auf 'login'
     };
-
-    // Wenn es einen Fehler beim Abrufen der Produkte gibt
-    if (error) {
-        return <div>{error}</div>;
-    }
-
-    // Wenn Produkte noch nicht geladen sind
-    if (products.length === 0 && isLoggedIn) {
-        return <div>Produkte werden geladen...</div>;
-    }
 
     // Funktion zum Öffnen des Modals
     const openModal = (product) => {
@@ -68,32 +58,45 @@ const Shop = ({ isLoggedIn, setIsLoggedIn, setCurrentPage }) => {
         setModalProduct(null);
     };
 
-// Funktion zum Hinzufügen eines Produkts zum Warenkorb
-const addToCart = () => {
-    if (modalProduct && modalProduct.quantity > 0) {
-        // Produkt wird zum Warenkorb hinzugefügt
-        const updatedCart = [...cart];
-        const productIndex = updatedCart.findIndex(item => item.product_id === modalProduct.product_id);
+    // Funktion zum Hinzufügen eines Produkts zum Warenkorb
+    const addToCart = () => {
+        if (modalProduct && modalProduct.quantity > 0) {
+            const updatedCart = [...cart];
+            const productIndex = updatedCart.findIndex(item => item.product_id === modalProduct.product_id);
 
-        if (productIndex !== -1) {
-            // Wenn das Produkt bereits im Warenkorb ist, erhöhe die Menge
-            updatedCart[productIndex].quantity += 1;
-        } else {
-            // Wenn das Produkt noch nicht im Warenkorb ist, füge es hinzu
-            updatedCart.push({ ...modalProduct, quantity: 1 });
+            if (productIndex !== -1) {
+                updatedCart[productIndex].quantity += 1;
+            } else {
+                updatedCart.push({ ...modalProduct, quantity: 1 });
+            }
+
+            setCart(updatedCart);
+
+            const updatedProduct = { ...modalProduct, quantity: modalProduct.quantity - 1 };
+            setModalProduct(updatedProduct);
+            closeModal();
         }
+    };
 
-        // Setze den Warenkorb mit dem aktualisierten Zustand
+    // Funktion zum Entfernen eines Artikels aus dem Warenkorb
+    const removeFromCart = (productId) => {
+        const updatedCart = cart.filter(item => item.product_id !== productId);
         setCart(updatedCart);
+    };
 
-        // Verringere die Menge des Produkts
-        const updatedProduct = { ...modalProduct, quantity: modalProduct.quantity - 1 };
-        setModalProduct(updatedProduct); // Aktualisiere das Modal-Produkt
+    // Funktion zur Anpassung der Menge im Warenkorb
+    const updateCartQuantity = (productId, newQuantity) => {
+        if (newQuantity < 1) return;
 
-        closeModal(); // Schließe das Modal nach dem Hinzufügen
-    }
-};
-
+        const updatedCart = cart.map(item => {
+            if (item.product_id === productId) {
+                const maxQuantity = products.find(p => p.product_id === productId)?.quantity || 0;
+                return { ...item, quantity: Math.min(newQuantity, maxQuantity) };
+            }
+            return item;
+        });
+        setCart(updatedCart);
+    };
 
     // Funktion zum Öffnen des Warenkorb-Modals
     const openCartModal = () => {
@@ -105,13 +108,17 @@ const addToCart = () => {
         setShowCartModal(false);
     };
 
+    // Funktion zur Berechnung des Gesamtpreises
+    const calculateTotal = () => {
+        return cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2);
+    };
+
     return (
         <div className="shop-container">
             {isLoggedIn ? (
                 <>
                     <h1>Willkommen im Shop!</h1>
 
-                    {/* Buttons nebeneinander */}
                     <div className="button-container">
                         <button className="cart-button" onClick={openCartModal}>
                             Warenkorb ({cart.length})
@@ -144,7 +151,6 @@ const addToCart = () => {
                         ))}
                     </div>
 
-                    {/* Produkt Modal */}
                     {modalProduct && (
                         <div className={`modal-overlay ${modalProduct ? 'show' : ''}`}>
                             <div className="modal-content">
@@ -170,48 +176,68 @@ const addToCart = () => {
                         </div>
                     )}
 
-                    {/* Warenkorb-Modal */}
-{/* Warenkorb-Modal */}
-{showCartModal && (
-    <div className="cart-modal-overlay show">
-        <div className="cart-modal-content">
-            <button className="cart-modal-close" onClick={closeCartModal}>
-                ×
-            </button>
-            <h2>Warenkorb</h2>
-            {cart.length === 0 ? (
-                <p>Der Warenkorb ist leer.</p>
-            ) : (
-                <ul>
-                    {cart.map((item, index) => (
-                        <li key={index}>
-                            <img
-                                src={item.image}
-                                alt={item.title}
-                                className="product-image"
-                                style={{ width: '50px', height: '50px' }}
-                            />
-                            <span>{item.title}</span>
-                            <span> x {item.quantity}</span>
-                        </li>
-                    ))}
-                </ul>
-            )}
-            <button className="close-cart-button" onClick={closeCartModal}>
-                Schließen
-            </button>
-        </div>
-    </div>
-)}
-
+                    {showCartModal && (
+                        <div className="cart-modal-overlay show">
+                            <div className="cart-modal-content">
+                                <button className="cart-modal-close" onClick={closeCartModal}>
+                                    ×
+                                </button>
+                                <h2>Warenkorb</h2>
+                                {cart.length === 0 ? (
+                                    <p>Der Warenkorb ist leer.</p>
+                                ) : (
+                                    <>
+                                        <ul className="cart-list">
+                                            {cart.map((item, index) => (
+                                                <li key={index} className="cart-item">
+                                                    <img
+                                                        src={item.image}
+                                                        alt={item.title}
+                                                        className="cart-item-image"
+                                                    />
+                                                    <span className="cart-item-title">{item.title}</span>
+                                                    <div className="cart-item-actions">
+                                                        <input
+                                                            type="number"
+                                                            min="1"
+                                                            value={item.quantity}
+                                                            onChange={(e) =>
+                                                                updateCartQuantity(item.product_id, parseInt(e.target.value, 10))
+                                                            }
+                                                            className="cart-item-quantity"
+                                                        />
+                                                        <button
+                                                            className="cart-item-remove"
+                                                            onClick={() => removeFromCart(item.product_id)}
+                                                        >
+                                                            X
+                                                        </button>
+                                                    </div>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                        <div className="cart-total">
+                                            <p>Gesamt: {calculateTotal()} €</p>
+                                        </div>
+                                        <button
+                                            className="checkout-button"
+                                            onClick={() => alert('Zur Kasse gehen!')}
+                                        >
+                                            Zur Kasse
+                                        </button>
+                                    </>
+                                )}
+                            </div>
+                        </div>
+                    )}
                 </>
             ) : (
-                <div>
-                    <p className="login-prompt">Bitte loggen Sie sich ein, um auf den Shop zuzugreifen.</p>
+                <>
+                    <h1>Bitte loggen Sie sich ein, um auf den Shop zuzugreifen.</h1>
                     <button className="login-button" onClick={redirectToLogin}>
-                        Zur Anmeldung
+                        Zum Login
                     </button>
-                </div>
+                </>
             )}
         </div>
     );
