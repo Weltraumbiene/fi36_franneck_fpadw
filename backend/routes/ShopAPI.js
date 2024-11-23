@@ -4,7 +4,6 @@ import jwt from 'jsonwebtoken';
 import mariadb from 'mariadb';
 import secrets from './secrets.js';  // Geheimschlüssel und DB-Daten
 import { body, validationResult } from 'express-validator';  // Für die Eingabevalidierung
-import axios from 'axios'; // Axios für die HTTP-Anfragen
 
 const router = express.Router();
 
@@ -35,7 +34,7 @@ router.get('/api/products', async (req, res) => {
 // Warenkorb in der Session speichern (wenn der Benutzer eingeloggt ist)
 router.post('/api/cart', (req, res) => {
     if (!req.session.cart) {
-        req.session.cart = [];
+        req.session.cart = []; // Initialisiere den Warenkorb, falls er noch nicht existiert
     }
 
     const { productId, quantity } = req.body;
@@ -46,45 +45,39 @@ router.post('/api/cart', (req, res) => {
     res.status(200).json({ message: 'Produkt zum Warenkorb hinzugefügt' });
 });
 
-// Bestellübersicht nach Abschluss
+// Bestellvorgang verarbeiten
 router.post('/api/order', async (req, res) => {
-    if (!req.session.cart || req.session.cart.length === 0) {
-        return res.status(400).json({ error: 'Warenkorb ist leer' });
+    const { userId, email, orderItems } = req.body;
+
+    // Eingabewerte validieren
+    if (!userId || !email || !orderItems || orderItems.length === 0) {
+        return res.status(400).json({ error: 'Fehlende Bestellinformationen' });
     }
 
-    const { userId } = req.body;
     try {
         const connection = await pool.getConnection();
-        const orderResult = await connection.query('INSERT INTO `order` (user_id) VALUES (?)', [userId]);
+
+        // Bestellung speichern
+        const orderResult = await connection.query(
+            'INSERT INTO `order` (user_id, email) VALUES (?, ?)', 
+            [userId, email]
+        );
         const orderId = orderResult.insertId;
 
         // Bestellpositionen speichern
-        for (let item of req.session.cart) {
-            await connection.query('INSERT INTO `order_item` (order_id, product_id, quantity) VALUES (?, ?, ?)', 
-                                    [orderId, item.productId, item.quantity]);
+        for (let item of orderItems) {
+            await connection.query(
+                'INSERT INTO `order_item` (order_id, user_id, email, product_id, quantity) VALUES (?, ?, ?, ?, ?)', 
+                [orderId, userId, email, item.productId, item.quantity]
+            );
         }
 
-        // Bestellung an externe API weiterleiten
-        const orderDetails = {
-            userId,
-            items: req.session.cart,
-            totalAmount: req.session.cart.reduce((total, item) => total + (item.quantity * item.price), 0) // Hier geht man davon aus, dass der Preis auch im Warenkorb vorhanden ist
-        };
+        // Leere den Warenkorb nach der Bestellung (optional, wenn du eine Session verwendest)
+        req.session.cart = [];
 
-        try {
-            const response = await axios.post('https://externe-bestell-api.com/order', orderDetails);
-            console.log('Bestellung an externe API gesendet', response.data);
+        connection.release();
 
-            // Leere den Warenkorb
-            req.session.cart = [];
-
-            connection.release();
-
-            res.status(200).json({ message: 'Bestellung erfolgreich und an externe API weitergeleitet' });
-        } catch (apiError) {
-            console.error('Fehler beim Weiterleiten der Bestellung an die externe API:', apiError);
-            res.status(500).json({ error: 'Fehler beim Weiterleiten der Bestellung an die externe API' });
-        }
+        res.status(200).json({ message: 'Bestellung erfolgreich' });
     } catch (error) {
         console.error('Fehler bei der Bestellung:', error);
         res.status(500).json({ error: 'Fehler bei der Bestellung' });

@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import apiRouter from './routes/api.js'; 
+import apiRouter from './routes/api.js'; // Bestellrouten
 import contactAPIRouter from './routes/ContactAPI.js'; 
 import loginRouter from './routes/LoginAPI.js'; 
 
