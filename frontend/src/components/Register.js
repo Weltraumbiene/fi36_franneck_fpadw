@@ -7,10 +7,11 @@ const Register = ({ onClose }) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [status, setStatus] = useState('');
 
+  // Formular-Submit-Handler
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Email Validation
+    // E-Mail-Validierung
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       setStatus('Bitte eine gültige E-Mail-Adresse eingeben.');
@@ -22,19 +23,22 @@ const Register = ({ onClose }) => {
       return;
     }
 
-    // Password Validation
+    // Passwort-Validierung
     const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@$%?])[A-Za-z\d!@$%?]{8,}$/;
     if (!passwordRegex.test(password)) {
-      setStatus('Das Passwort muss mindestens 8 Zeichen lang sein, einen Großbuchstaben, eine Zahl und ein Sonderzeichen enthalten.');
+      setStatus(
+        'Das Passwort muss mindestens 8 Zeichen lang sein, einen Großbuchstaben, eine Zahl und ein Sonderzeichen (!@$%?) enthalten.'
+      );
       return;
     }
 
+    // Passwort-Bestätigung
     if (password !== confirmPassword) {
       setStatus('Passwörter stimmen nicht überein.');
       return;
     }
 
-    // API Request
+    // API-Anfrage senden
     try {
       const response = await fetch('http://bcf.mshome.net:4000/api/register', {
         method: 'POST',
@@ -45,8 +49,14 @@ const Register = ({ onClose }) => {
       });
 
       const data = await response.json();
+
       if (response.ok) {
-        setStatus('Erfolgreich registriert! Sie können dieses Fenster schließen und sich anmelden.');
+        setStatus(
+          <>
+            Erfolgreich registriert!<br />
+            Sie können dieses Fenster schließen und sich anmelden.
+          </>
+        );
         setEmail('');
         setPassword('');
         setConfirmPassword('');
@@ -59,11 +69,19 @@ const Register = ({ onClose }) => {
   };
 
   return (
+    // Modal Overlay
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <button className="close-button" onClick={onClose}>&times;</button>
+        {/* Schließen-Button */}
+        <button className="close-button" onClick={onClose}>
+          &times;
+        </button>
         <h1>Registrieren</h1>
+
+        {/* Statusnachricht */}
         {status && <div className="register-message">{status}</div>}
+
+        {/* Formular */}
         <form onSubmit={handleSubmit} className="register-form">
           <label htmlFor="email">E-Mail</label>
           <input
@@ -74,6 +92,7 @@ const Register = ({ onClose }) => {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
+
           <label htmlFor="password">Passwort</label>
           <input
             id="password"
@@ -83,6 +102,7 @@ const Register = ({ onClose }) => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+
           <label htmlFor="confirmPassword">Passwort bestätigen</label>
           <input
             id="confirmPassword"
@@ -92,7 +112,10 @@ const Register = ({ onClose }) => {
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
-          <button type="submit" className="register-button">Registrieren</button>
+
+          <button type="submit" className="register-button">
+            Registrieren
+          </button>
         </form>
       </div>
     </div>
