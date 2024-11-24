@@ -121,7 +121,48 @@ const Shop = ({ isLoggedIn, setIsLoggedIn, setCurrentPage }) => {
 
     // Funktion zur Berechnung des Gesamtpreises
     const calculateTotal = () => {
-        return cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2);
+        return cart.reduce((sum, item) => sum + Number(item.price) * item.quantity, 0).toFixed(2);
+    };
+
+    // Funktion zum Abschließen der Bestellung
+    const handleCheckout = async () => {
+        if (cart.length === 0) {
+            alert('Ihr Warenkorb ist leer. Bitte fügen Sie Produkte hinzu.');
+            return;
+        }
+
+        // Erstelle die Order-Daten für die Anfrage
+        const orderItems = cart.map(item => ({
+            user_id: userId,
+            email: userEmail,
+            product_id: item.product_id,
+            title: item.title,
+            price: Number(item.price),
+            quantity: item.quantity,
+            total_price: (Number(item.price) * item.quantity).toFixed(2),
+        }));
+
+        // Versende die Bestellung an die API
+        try {
+            const response = await fetch('http://bcf.mshome.net:4000/api/checkout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ orderItems }),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                alert('Bestellung erfolgreich abgeschlossen!');
+                setCart([]);
+            } else {
+                throw new Error('Fehler beim Abschließen der Bestellung');
+            }
+        } catch (error) {
+            console.error('Fehler bei der Bestellung:', error);
+            alert('Beim Abschluss der Bestellung ist ein Fehler aufgetreten.');
+        }
     };
 
     return (
@@ -129,14 +170,13 @@ const Shop = ({ isLoggedIn, setIsLoggedIn, setCurrentPage }) => {
             {isLoggedIn ? (
                 <>
                     <h1>Willkommen im Shop!</h1>
-                    {/* Anzeige von E-Mail und Benutzer-ID */}
                     <p>Hallo {userEmail}! Deine Benutzer-ID ist: {userId}</p>
 
                     <div className="button-container">
                         <button className="cart-button" onClick={openCartModal}>
                             Warenkorb ({cart.length})
                         </button>
-                        <button className="checkout-button">
+                        <button className="checkout-button" onClick={handleCheckout}>
                             Zur Kasse
                         </button>
                         <button className="logout-button" onClick={handleLogout}>
@@ -158,7 +198,7 @@ const Shop = ({ isLoggedIn, setIsLoggedIn, setCurrentPage }) => {
                                 />
                                 <h2 className="product-title">{product.title}</h2>
                                 <p className="product-price">
-                                    Preis: {parseFloat(product.price).toFixed(2)} €
+                                    Preis: {Number(product.price).toFixed(2)} €
                                 </p>
                             </div>
                         ))}
@@ -179,7 +219,7 @@ const Shop = ({ isLoggedIn, setIsLoggedIn, setCurrentPage }) => {
                                 <h2>{modalProduct.title}</h2>
                                 <p>{modalProduct.description}</p>
                                 <p className="product-price">
-                                    Preis: {parseFloat(modalProduct.price).toFixed(2)} €
+                                    Preis: {Number(modalProduct.price).toFixed(2)} €
                                 </p>
                                 <p>Verfügbar: {modalProduct.quantity} Stück</p>
                                 <button className="shop-button" onClick={addToCart}>
@@ -189,70 +229,66 @@ const Shop = ({ isLoggedIn, setIsLoggedIn, setCurrentPage }) => {
                         </div>
                     )}
 
-{showCartModal && (
-    <div className="cart-modal-overlay show">
-        <div className="cart-modal-content">
-            <button className="cart-modal-close" onClick={closeCartModal}>
-                ×
-            </button>
-            {/* Anzeige des Warenkorb-Headers mit E-Mail und Benutzer-ID */}
-            <h2>Warenkorb von {userEmail} (User ID: {userId})</h2>
+                    {showCartModal && (
+                        <div className="cart-modal-overlay show">
+                            <div className="cart-modal-content">
+                                <button className="cart-modal-close" onClick={closeCartModal}>
+                                    ×
+                                </button>
+                                <h2>Warenkorb von {userEmail} (User ID: {userId})</h2>
 
-            {cart.length === 0 ? (
-                <p>Der Warenkorb ist leer.</p>
-            ) : (
-                <>
-                    <ul className="cart-list">
-                        {cart.map((item, index) => (
-                            <li key={index} className="cart-item">
-                                <img
-                                    src={item.image}
-                                    alt={item.title}
-                                    className="cart-item-image"
-                                />
-                                <span className="cart-item-title">{item.title}</span>
-                                <div className="cart-item-actions">
-                                    <input
-                                        type="number"
-                                        min="1"
-                                        value={item.quantity}
-                                        onChange={(e) =>
-                                            updateCartQuantity(item.product_id, parseInt(e.target.value, 10))
-                                        }
-                                        className="cart-item-quantity"
-                                    />
-                                    <button
-                                        className="cart-item-remove"
-                                        onClick={() => removeFromCart(item.product_id)}
-                                    >
-                                        X
-                                    </button>
-                                </div>
-                            </li>
-                        ))}
-                    </ul>
-                    <div className="cart-total">
-                        <p>Gesamt: {calculateTotal()} €</p>
-                    </div>
-                    <button
-                        className="checkout-button"
-                    >
-                        Zur Kasse
-                    </button>
-                </>
-            )}
-        </div>
-    </div>
-)}
-
+                                {cart.length === 0 ? (
+                                    <p>Der Warenkorb ist leer.</p>
+                                ) : (
+                                    <>
+                                        <ul className="cart-list">
+                                            {cart.map((item, index) => (
+                                                <li key={index} className="cart-item">
+                                                    <img
+                                                        src={item.image}
+                                                        alt={item.title}
+                                                        className="cart-item-image"
+                                                    />
+                                                    <span className="cart-item-title">{item.title}</span>
+                                                    <span className="cart-item-price">
+                                                        {Number(item.price).toFixed(2)} €
+                                                    </span>
+                                                    <input
+                                                        type="number"
+                                                        value={item.quantity}
+                                                        min="1"
+                                                        max={item.quantity}
+                                                        onChange={(e) =>
+                                                            updateCartQuantity(item.product_id, parseInt(e.target.value, 10))
+                                                        }
+                                                        className="cart-item-quantity"
+                                                    />
+                                                    <span className="cart-item-total-price">
+                                                        {(Number(item.price) * item.quantity).toFixed(2)} €
+                                                    </span>
+                                                    <button
+                                                        className="cart-item-remove"
+                                                        onClick={() => removeFromCart(item.product_id)}
+                                                    >
+                                                        Entfernen
+                                                    </button>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                        <div className="cart-total">
+                                            <strong>Gesamtpreis: {calculateTotal()} €</strong>
+                                        </div>
+                                    </>
+                                )}
+                            </div>
+                        </div>
+                    )}
                 </>
             ) : (
-                <>
-                    <h1>Bitte loggen Sie sich ein, um auf den Shop zuzugreifen.</h1>
-                    <button className="login-button" onClick={redirectToLogin}>
-                        Zum Login
-                    </button>
-                </>
+                <div className="login-prompt">
+                    <h2>Du musst eingeloggt sein, um den Shop zu sehen</h2>
+                    <button onClick={redirectToLogin}>Zum Login</button>
+                </div>
             )}
         </div>
     );
