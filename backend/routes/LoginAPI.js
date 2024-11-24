@@ -71,14 +71,19 @@ router.post(
         { expiresIn: secrets.jwt_options.expiresIn }  // Token läuft nach 1 Stunde ab
       );
 
-      // Erfolgreiche Antwort mit Token und userId
-      res.status(200).json({ message: 'Erfolgreich eingeloggt.', token, userId: user.user_id });
-    } catch (error) {
-      console.error('Datenbankfehler:', error);
-      res.status(500).json({ message: 'Ein Fehler ist aufgetreten.' });
-    } finally {
-      if (connection) connection.release();
-    }
+  // Erfolgreiche Antwort mit Token, userId und email
+  res.status(200).json({ 
+    message: 'Erfolgreich eingeloggt.', 
+    token, 
+    userId: user.user_id, 
+    email: user.email // E-Mail hinzufügen
+  });
+} catch (error) {
+  console.error('Datenbankfehler:', error);
+  res.status(500).json({ message: 'Ein Fehler ist aufgetreten.' });
+} finally {
+  if (connection) connection.release();
+}
   }
 );
 

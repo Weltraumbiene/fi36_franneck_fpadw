@@ -1,10 +1,9 @@
 // api.js
-
 import express from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import pool from './db.js'; // Datenbankverbindung
-import secrets from './secrets.js'; // Secrets
+import pool from './db.js'; // Datenbankverbindung im selben Ordner
+import secrets from './secrets.js'; // secrets.js im selben Ordner
 import { verifyToken } from './middleware.js';
 
 const router = express.Router();
@@ -73,18 +72,6 @@ router.get('/profile', verifyToken, async (req, res) => {
     } catch (error) {
         console.error('Fehler beim Abrufen des Profils:', error.message);
         res.status(500).json({ error: 'Fehler beim Abrufen des Profils' });
-    }
-});
-
-// Shop-Endpoint: Produkte abrufen
-router.get('/products', async (req, res) => {
-    try {
-        const products = await pool.query('SELECT * FROM product');
-        res.setHeader('Content-Type', 'application/json'); // JSON-Header setzen
-        res.json(products); // Produktdaten als JSON zurückgeben
-    } catch (error) {
-        console.error('Fehler beim Abrufen der Produkte:', error.message);
-        res.status(500).json({ error: 'Fehler beim Abrufen der Produkte' });
     }
 });
 

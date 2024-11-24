@@ -1,4 +1,3 @@
-//App.js
 import React, { useState } from 'react';
 import './App.css';
 import Header from './components/Header';
@@ -18,9 +17,9 @@ const App = () => {
       case 'home':
         return <Home />;
       case 'login':
-        return <Login setIsLoggedIn={setIsLoggedIn} setCurrentPage={setCurrentPage} />; // setCurrentPage übergeben
+        return <Login setIsLoggedIn={setIsLoggedIn} setCurrentPage={setCurrentPage} />; // `setCurrentPage` übergeben
       case 'shop':
-        return <Shop isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setCurrentPage={setCurrentPage} />;
+        return <Shop isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />;
       case 'contact':
         return <Contact />;
       case 'imprint':
@@ -29,6 +28,7 @@ const App = () => {
         return <Home />;
     }
   };
+  
 
   return (
     <div className="App">

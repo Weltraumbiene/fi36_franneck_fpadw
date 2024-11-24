@@ -6,12 +6,13 @@ const Login = ({ setIsLoggedIn, setCurrentPage }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
-  const [showRegisterModal, setShowRegisterModal] = useState(false); // Modal-Steuerung
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
+      // Verbindung explizit herstellen
       const apiUrl = 'http://bcf.mshome.net:4000/api/login';
 
       const response = await fetch(`${apiUrl}`, {
@@ -25,13 +26,15 @@ const Login = ({ setIsLoggedIn, setCurrentPage }) => {
       const data = await response.json();
 
       if (response.ok) {
+        // Speichere Token und Benutzer-ID in der Sitzung
         sessionStorage.setItem('token', data.token);
         sessionStorage.setItem('userId', data.userId);
+        sessionStorage.setItem('email', data.email);
 
         setIsLoggedIn(true);
         setMessage('Erfolgreich eingeloggt! Weiterleitung...');
         setTimeout(() => {
-          setCurrentPage('shop');
+          setCurrentPage('shop'); // Wechsel zur Shop-Seite
         }, 1000);
       } else {
         setMessage(data.message || 'Login fehlgeschlagen');
@@ -75,14 +78,13 @@ const Login = ({ setIsLoggedIn, setCurrentPage }) => {
           <button
             type="button"
             className="open-register-modal-button"
-            onClick={() => setShowRegisterModal(true)} // Button öffnet das Modal
+            onClick={() => setShowRegisterModal(true)}
           >
             Hier klicken, um sich zu registrieren!
           </button>
         </p>
       </div>
 
-      {/* Modal für Registrierung */}
       {showRegisterModal && (
         <Register onClose={() => setShowRegisterModal(false)} />
       )}
