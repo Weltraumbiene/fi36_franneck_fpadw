@@ -3,25 +3,39 @@ import '../css/Shop.css';
 
 const Shop = ({ isLoggedIn, setIsLoggedIn, setCurrentPage }) => {
     const [products, setProducts] = useState([]);
-    const [error, setError] = useState(null);
-    const [modalProduct, setModalProduct] = useState(null); // Produkt für Modal
-    const [cart, setCart] = useState([]); // Warenkorb für Session
-    const [showCartModal, setShowCartModal] = useState(false); // Warenkorb Modal Sichtbarkeit
+    const [modalProduct, setModalProduct] = useState(null); 
+    const [cart, setCart] = useState([]);
+    const [showCartModal, setShowCartModal] = useState(false);
+    const [user, setUser] = useState(null);  // Benutzerdaten im Zustand speichern
 
-    // Überprüfe, ob der Benutzer eingeloggt ist (Token im sessionStorage)
+    const handleLogin = (userData) => {
+        // Speichern der Benutzerdaten im sessionStorage
+        sessionStorage.setItem('user_id', userData.id);  // Beachte 'user_id'
+        sessionStorage.setItem('email', userData.email);
+    };
+
     useEffect(() => {
         const token = sessionStorage.getItem('token');
         if (!token) {
-            setIsLoggedIn(false); // Setze den Login-Status auf false, wenn kein Token gefunden wird
+          setIsLoggedIn(false);
         } else {
-            setIsLoggedIn(true); // Falls Token vorhanden ist, setze den Login-Status auf true
+          setIsLoggedIn(true);
         }
-    }, [setIsLoggedIn]);
+
+        // Benutzerdaten aus dem sessionStorage laden
+        const userFromSession = {
+            user_id: sessionStorage.getItem('user_id'),
+            email: sessionStorage.getItem('email'),
+          };
+          if (userFromSession.user_id && userFromSession.email) {
+            setUser(userFromSession);
+          }
+        }, [setIsLoggedIn]);
 
     // Produkte abrufen, wenn der Benutzer eingeloggt ist
     useEffect(() => {
         const fetchProducts = async () => {
-            if (!isLoggedIn) return; // Verhindert das Abrufen von Produkten, wenn der Benutzer nicht eingeloggt ist
+            if (!isLoggedIn) return;
 
             try {
                 const response = await fetch('http://bcf.mshome.net:4000/api/products');
@@ -29,36 +43,29 @@ const Shop = ({ isLoggedIn, setIsLoggedIn, setCurrentPage }) => {
                 setProducts(data);
             } catch (error) {
                 console.error('Fehler beim Abrufen der Produkte:', error);
-                setError('Fehler beim Abrufen der Produkte');
             }
         };
 
         fetchProducts();
     }, [isLoggedIn]);
 
-    // Abmeldefunktion
     const handleLogout = () => {
         sessionStorage.removeItem('token');
-        sessionStorage.removeItem('userId');
-        setIsLoggedIn(false); // Setzt den Login-Status auf false
+        setIsLoggedIn(false);
     };
 
-    // Funktion für das Weiterleiten zur Login-Seite
     const redirectToLogin = () => {
-        setCurrentPage('login'); // Ändere die aktuelle Seite auf 'login'
+        setCurrentPage('login');
     };
 
-    // Funktion zum Öffnen des Modals
     const openModal = (product) => {
         setModalProduct(product);
     };
 
-    // Funktion zum Schließen des Modals
     const closeModal = () => {
         setModalProduct(null);
     };
 
-    // Funktion zum Hinzufügen eines Produkts zum Warenkorb
     const addToCart = () => {
         if (modalProduct && modalProduct.quantity > 0) {
             const updatedCart = [...cart];
@@ -67,7 +74,12 @@ const Shop = ({ isLoggedIn, setIsLoggedIn, setCurrentPage }) => {
             if (productIndex !== -1) {
                 updatedCart[productIndex].quantity += 1;
             } else {
-                updatedCart.push({ ...modalProduct, quantity: 1 });
+                updatedCart.push({ 
+                    ...modalProduct, 
+                    quantity: 1, 
+                    title: modalProduct.title,
+                    price: modalProduct.price 
+                });
             }
 
             setCart(updatedCart);
@@ -78,39 +90,75 @@ const Shop = ({ isLoggedIn, setIsLoggedIn, setCurrentPage }) => {
         }
     };
 
-    // Funktion zum Entfernen eines Artikels aus dem Warenkorb
     const removeFromCart = (productId) => {
         const updatedCart = cart.filter(item => item.product_id !== productId);
         setCart(updatedCart);
     };
 
-    // Funktion zur Anpassung der Menge im Warenkorb
     const updateCartQuantity = (productId, newQuantity) => {
-        if (newQuantity < 1) return;
-
+        if (newQuantity < 1) return;  // Verhindert, dass die Menge unter 1 sinkt
+    
         const updatedCart = cart.map(item => {
             if (item.product_id === productId) {
-                const maxQuantity = products.find(p => p.product_id === productId)?.quantity || 0;
-                return { ...item, quantity: Math.min(newQuantity, maxQuantity) };
+                return { ...item, quantity: newQuantity };  // Setze die neue Menge direkt
             }
             return item;
         });
         setCart(updatedCart);
     };
 
-    // Funktion zum Öffnen des Warenkorb-Modals
     const openCartModal = () => {
         setShowCartModal(true);
     };
 
-    // Funktion zum Schließen des Warenkorb-Modals
     const closeCartModal = () => {
         setShowCartModal(false);
     };
 
-    // Funktion zur Berechnung des Gesamtpreises
     const calculateTotal = () => {
         return cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2);
+    };
+
+    const handleCheckout = async () => {
+        if (!user || !user.user_id || !user.email) {
+            alert('Fehlende Benutzerdaten: user_id oder email');
+            return;
+        }
+
+        const orderItems = cart.map(item => ({
+            user_id: user.user_id,    // user_id für die Bestellung
+            email: user.email,       // Email des Nutzers
+            order_date: new Date().toISOString(),  // Datum und Uhrzeit der Bestellung
+            product_id: item.product_id,  // Produkt ID
+            title: item.title,  // Produkt Titel
+            price: item.price,  // Preis des Produkts
+            quantity: item.quantity,  // Menge des Produkts
+            total_price: (item.price * item.quantity).toFixed(2),  // Gesamtpreis für dieses Produkt
+        }));
+
+        // Bestellung an das Backend übermitteln
+        try {
+            const response = await fetch('/api/order', {
+                method: 'PUT',  // PUT-Methode verwenden
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ items: orderItems }),  // Sende alle Bestellposten als Array
+            });
+
+            const result = await response.json();
+            if (response.ok) {
+                alert('Bestellung erfolgreich!');
+                console.log(result);
+                // Optional: Leeren des Warenkorbs nach erfolgreichem Checkout
+                setCart([]);
+            } else {
+                alert('Fehler bei der Bestellung: ' + result.message);
+            }
+        } catch (error) {
+            console.error('Fehler beim Checkout:', error);
+            alert('Ein unerwarteter Fehler ist aufgetreten.');
+        }
     };
 
     return (
@@ -123,7 +171,7 @@ const Shop = ({ isLoggedIn, setIsLoggedIn, setCurrentPage }) => {
                         <button className="cart-button" onClick={openCartModal}>
                             Warenkorb ({cart.length})
                         </button>
-                        <button className="checkout-button">
+                        <button className="checkout-button" onClick={handleCheckout}>
                             Zur Kasse
                         </button>
                         <button className="logout-button" onClick={handleLogout}>
@@ -221,7 +269,7 @@ const Shop = ({ isLoggedIn, setIsLoggedIn, setCurrentPage }) => {
                                         </div>
                                         <button
                                             className="checkout-button"
-                                            onClick={() => alert('Zur Kasse gehen!')}
+                                            onClick={handleCheckout}
                                         >
                                             Zur Kasse
                                         </button>

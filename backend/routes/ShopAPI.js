@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import mariadb from 'mariadb';
 import secrets from './secrets.js';  // Geheimschlüssel und DB-Daten
 import { body, validationResult } from 'express-validator';  // Für die Eingabevalidierung
+import { verifyToken } from './middleware.js';
 
 const router = express.Router();
 
@@ -14,6 +15,15 @@ const pool = mariadb.createPool({
   password: secrets.db_password,
   database: secrets.db_database,
   connectionLimit: 5
+});
+
+// Hinzufügen der JWT-Verifizierung
+router.post('/api/order', verifyToken, async (req, res) => {
+    const { userId, email, orderItems } = req.body;
+
+    if (!userId || !email || !orderItems || orderItems.length === 0) {
+        return res.status(400).json({ error: 'Fehlende Bestellinformationen' });
+    }
 });
 
 // Abrufen der Produkte
