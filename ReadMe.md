@@ -1,5 +1,4 @@
-13.11.2024
-ich hab eine Datenbank mit dem Namen fi36_franneck_fpadw erstellt. In der sind vier Tabellen. Die erste Tabelle heißt user und speichert die E-Mail-Adressen und Passwörter der Benutzer. Die E-Mail-Adresse ist dabei der Hauptschlüssel, also eindeutig für jeden Benutzer. Dann gibt es die Tabelle product, in der Produkte gespeichert werden. Da sind die Spalten für den Namen des Produkts und die Menge, die auf Lager ist. Die Menge ist standardmäßig auf 0 gesetzt.
+13.11.2024 ich hab eine Datenbank mit dem Namen fi36_franneck_fpadw erstellt. In der sind vier Tabellen. Die erste Tabelle heißt user und speichert die E-Mail-Adressen und Passwörter der Benutzer. Die E-Mail-Adresse ist dabei der Hauptschlüssel, also eindeutig für jeden Benutzer. Dann gibt es die Tabelle product, in der Produkte gespeichert werden. Da sind die Spalten für den Namen des Produkts und die Menge, die auf Lager ist. Die Menge ist standardmäßig auf 0 gesetzt.
 
 Die nächste Tabelle heißt order und da werden Bestellungen von Nutzern gespeichert. Jede Bestellung hat eine eigene ID, die E-Mail des Nutzers, der bestellt hat, und das Bestelldatum. Wenn der Nutzer gelöscht wird, bleibt die Bestellung trotzdem in der Tabelle, aber die E-Mail wird auf null gesetzt.
 
@@ -7,12 +6,9 @@ Die letzte Tabelle heißt order_item und da wird gespeichert, welche Produkte in
 
 Alle Tabellen sind miteinander verknüpft, sodass man immer genau weiß, welche Bestellungen zu welchem Nutzer und welche Produkte zu einer Bestellung gehören.
 
-So zumindest die Theorie! :D
-Ich habe einen SQL Dump bereits commitet (nicht als Teil der Projektabgabe)
+So zumindest die Theorie! :D Ich habe einen SQL Dump bereits commitet (nicht als Teil der Projektabgabe)
 
-
-14.11.2024
-Einrichtung der API:
+14.11.2024 Einrichtung der API:
 
 Ich habe eine API mit Express erstellt, die grundlegende Funktionen wie Registrierung (/register), Login (/login) und eine geschützte Profilseite (/profile) umfasst. Um die Benutzerdaten sicher zu übertragen und zu verifizieren, habe ich JSON Web Tokens (JWT) genutzt. Die Passwörter werden mit bcrypt sicher gehasht, bevor sie in der Datenbank gespeichert werden. Die Verbindung zur MariaDB-Datenbank läuft über das mariadb-Modul, wobei alle sensiblen Daten in der secrets.js-Datei gespeichert sind.
 
@@ -26,28 +22,26 @@ Ich habe die API auf Port 4000 gestartet und sie unter der Basis-URL http://bcf.
 
 Tests der Endpunkte mit curl:
 
-    Registrierung: Ich habe die Registrierung getestet, indem ich einen POST-Request an /api/register geschickt habe. Das hat erfolgreich einen neuen Benutzer erstellt und mir ein Token zurückgegeben:
+Registrierung: Ich habe die Registrierung getestet, indem ich einen POST-Request an /api/register geschickt habe. Das hat erfolgreich einen neuen Benutzer erstellt und mir ein Token zurückgegeben:
 
-curl -X POST http://bcf.mshome.net:4000/api/register \
--H "Content-Type: application/json" \
+curl -X POST http://bcf.mshome.net:4000/api/register
+-H "Content-Type: application/json"
 -d '{"email": "test@example.com", "password": "deinPasswort"}'
 
 Login: Der Login-Endpoint funktioniert auch gut. Nachdem ich mich mit den gleichen Daten eingeloggt habe, habe ich ein Token erhalten:
 
-curl -X POST http://bcf.mshome.net:4000/api/login \
--H "Content-Type: application/json" \
+curl -X POST http://bcf.mshome.net:4000/api/login
+-H "Content-Type: application/json"
 -d '{"email": "test@example.com", "password": "deinPasswort"}'
 
 Profil-Route: Mit dem erhaltenen Token konnte ich die geschützte Profilseite (/api/profile) abrufen:
 
-curl -X GET http://bcf.mshome.net:4000/api/profile \
--H "Authorization: Bearer <TOKEN>"
+curl -X GET http://bcf.mshome.net:4000/api/profile
+-H "Authorization: Bearer "
 
-16.11.2024
-Ich hab mithilfe von Unterrichtsmaterialien einen React-Server zum laufen gebracht. Der Server ist soweit startklar und wird jetzt nach und nach an die Anforderungen vom Projekt angepasst. Momentan dient das ganze nur als Gerüst, auf dem ich das eigentliche Projekt aufbauen werde. Es ist also noch nichts fertiges, sondern mehr eine Basis, mit der ich weiterarbeiten kann.
+16.11.2024 Ich hab mithilfe von Unterrichtsmaterialien einen React-Server zum laufen gebracht. Der Server ist soweit startklar und wird jetzt nach und nach an die Anforderungen vom Projekt angepasst. Momentan dient das ganze nur als Gerüst, auf dem ich das eigentliche Projekt aufbauen werde. Es ist also noch nichts fertiges, sondern mehr eine Basis, mit der ich weiterarbeiten kann.
 
-17.11.2024
-Zuerst habe ich das Frontend für das Kontaktformular in React erstellt. Dabei verwendete ich die useState-Hooks, um die Eingaben des Nutzers (Name und Nachricht) sowie den Status des Formulars zu verwalten. Ich entwickelte eine handleSubmit-Funktion, die beim Absenden des Formulars die Daten an das Backend schickte. Dazu benutzte ich das fetch-API, um eine POST-Anfrage an den Server zu senden. Wenn die Anfrage erfolgreich war, wurde eine Bestätigung angezeigt, andernfalls wurde eine Fehlermeldung eingeblendet. Ich kümmerte mich auch um die Eingabefelder und den Absende-Button, um das Formular benutzerfreundlich und funktional zu gestalten.
+17.11.2024 Zuerst habe ich das Frontend für das Kontaktformular in React erstellt. Dabei verwendete ich die useState-Hooks, um die Eingaben des Nutzers (Name und Nachricht) sowie den Status des Formulars zu verwalten. Ich entwickelte eine handleSubmit-Funktion, die beim Absenden des Formulars die Daten an das Backend schickte. Dazu benutzte ich das fetch-API, um eine POST-Anfrage an den Server zu senden. Wenn die Anfrage erfolgreich war, wurde eine Bestätigung angezeigt, andernfalls wurde eine Fehlermeldung eingeblendet. Ich kümmerte mich auch um die Eingabefelder und den Absende-Button, um das Formular benutzerfreundlich und funktional zu gestalten.
 
 Im Backend erstellte ich eine API mit Node.js und Express, die auf POST-Anfragen an den Endpunkt /contact reagiert. Die Anfragen wurden auf die erforderlichen Felder (Name und Nachricht) überprüft, bevor die Daten in eine MariaDB-Datenbank gespeichert wurden. Ich verwendete dafür einen Verbindungspool von mariadb, um sicherzustellen, dass die Kommunikation mit der Datenbank effizient und stabil war. Das Backend gab dann eine Antwort zurück, die dem Frontend mitteilt, ob die Nachricht erfolgreich gespeichert wurde oder ein Fehler aufgetreten ist.
 
@@ -63,7 +57,7 @@ Als letzten Schritt fügte ich die Möglichkeit hinzu, einzelne Datensätze aus 
 
 Abschließend kann ich sagen, dass ich eine funktionierende Lösung entwickelt habe, bei der das Kontaktformular im Frontend mit React erstellt wurde, das Backend in Node.js und Express läuft und die Daten in einer MariaDB-Datenbank gespeichert werden. Die Anwendung ist robust, sicher und benutzerfreundlich, und ich konnte alle notwendigen Funktionen erfolgreich implementieren.
 
-18.11.2024 -zwischenschritt- 
+18.11.2024 -zwischenschritt-
 
 Zunächst habe ich eine .env-Datei erstellt, die als zentrale Stelle für alle Umgebungsvariablen dient, die sowohl im Backend als auch im Frontend verwendet werden. Diese Datei ist besonders nützlich, um sensible Daten wie API-Schlüssel, Datenbank-Verbindungsinformationen und andere vertrauliche Daten sicher zu speichern. In dieser Datei habe ich die Konfiguration für die Backend-Umgebung vorgenommen, z. B. den Port und den Datenbank-URL für die Verbindung zum Backend.
 
@@ -71,10 +65,10 @@ Im Backend habe ich eine API für den Login-Mechanismus entwickelt, die mit eine
 
 Zunächst habe ich dafür gesorgt, dass die API für das Login im Backend korrekt funktioniert. Hierbei habe ich sicher gestellt, dass:
 
-    Die Benutzeranmeldedaten (E-Mail und Passwort) über eine POST-Anfrage im Body der Anfrage gesendet werden.
-    Der Server die Daten überprüft, indem er die E-Mail und das Passwort mit den in der Datenbank gespeicherten Werten vergleicht.
-    Bei erfolgreicher Authentifizierung wird ein JWT erstellt und an den Client übermittelt.
-    Bei fehlerhaften Anmeldedaten wird eine Fehlermeldung an den Client zurückgegeben.
+Die Benutzeranmeldedaten (E-Mail und Passwort) über eine POST-Anfrage im Body der Anfrage gesendet werden.
+Der Server die Daten überprüft, indem er die E-Mail und das Passwort mit den in der Datenbank gespeicherten Werten vergleicht.
+Bei erfolgreicher Authentifizierung wird ein JWT erstellt und an den Client übermittelt.
+Bei fehlerhaften Anmeldedaten wird eine Fehlermeldung an den Client zurückgegeben.
 
 In der Backend-API habe ich auch eine grundlegende Fehlerbehandlung hinzugefügt, um sicherzustellen, dass bei einem fehlerhaften Login-Versuch eine entsprechende Fehlermeldung angezeigt wird.
 
@@ -82,10 +76,10 @@ Im Frontend habe ich eine Login-Komponente in React entwickelt. Diese Komponente
 
 Hier sind die wichtigsten Schritte, die ich in der Login-Komponente umgesetzt habe:
 
-    Eingabe von E-Mail und Passwort: Die Benutzer können ihre E-Mail-Adresse und ihr Passwort in die entsprechenden Eingabefelder eingeben.
-    Anfrage an die API: Beim Absenden des Formulars wird die handleSubmit-Funktion aufgerufen, die eine POST-Anfrage an die Backend-API sendet. Hierbei werden die E-Mail und das Passwort als JSON im Body der Anfrage übermittelt.
-    Antwort verarbeiten: Wenn der Server ein JWT zurückgibt, speichere ich dieses Token im localStorage, um den Benutzer für zukünftige Anfragen zu authentifizieren. Ich speichere auch die userId, die mit dem Token zurückgegeben wird, um den eingeloggten Benutzer später zu identifizieren.
-    Fehlermeldungen: Wenn der Login fehlschlägt, zeige ich eine entsprechende Fehlermeldung an, die entweder aus der Antwort des Servers kommt oder eine allgemeine Fehlermeldung ist.
+Eingabe von E-Mail und Passwort: Die Benutzer können ihre E-Mail-Adresse und ihr Passwort in die entsprechenden Eingabefelder eingeben.
+Anfrage an die API: Beim Absenden des Formulars wird die handleSubmit-Funktion aufgerufen, die eine POST-Anfrage an die Backend-API sendet. Hierbei werden die E-Mail und das Passwort als JSON im Body der Anfrage übermittelt.
+Antwort verarbeiten: Wenn der Server ein JWT zurückgibt, speichere ich dieses Token im localStorage, um den Benutzer für zukünftige Anfragen zu authentifizieren. Ich speichere auch die userId, die mit dem Token zurückgegeben wird, um den eingeloggten Benutzer später zu identifizieren.
+Fehlermeldungen: Wenn der Login fehlschlägt, zeige ich eine entsprechende Fehlermeldung an, die entweder aus der Antwort des Servers kommt oder eine allgemeine Fehlermeldung ist.
 
 Durch den Einsatz von React's useState-Hook habe ich den Status der Formulardaten sowie etwaige Fehlermeldungen verwaltet, und mit useNavigate stelle ich sicher, dass der Benutzer nach erfolgreichem Login zur Startseite weitergeleitet wird.
 
@@ -103,9 +97,7 @@ Ich habe auch sicherstellt, dass bestimmte Routen, die nur für eingeloggte Benu
 
 Zuletzt habe ich auf beiden Seiten (Frontend und Backend) robuste Fehlerbehandlung eingebaut. Wenn beim Login oder bei der Registrierung Fehler auftreten, werden klare Fehlermeldungen angezeigt, die den Benutzer darüber informieren, was schiefgegangen ist. Auf der Frontend-Seite zeige ich diese Fehlermeldungen in der Login- und Registrierungsform an, während im Backend auch entsprechende HTTP-Statuscodes zurückgegeben werden (z.B. 401 für "Unauthorized" oder 500 für interne Serverfehler).
 
-
-19.11.2024
-Heute hatte ich einige Herausforderungen bei der Implementierung der Login-Funktion und der Integration des Shops in meine React-App. Anfangs war das Projekt recht einfach: Ich wollte ein Login-System erstellen, bei dem Benutzer sich anmelden und danach auf eine Shop-Seite weitergeleitet werden. Allerdings stieß ich schon früh auf Probleme, die mich einige Zeit gekostet haben.
+19.11.2024 Heute hatte ich einige Herausforderungen bei der Implementierung der Login-Funktion und der Integration des Shops in meine React-App. Anfangs war das Projekt recht einfach: Ich wollte ein Login-System erstellen, bei dem Benutzer sich anmelden und danach auf eine Shop-Seite weitergeleitet werden. Allerdings stieß ich schon früh auf Probleme, die mich einige Zeit gekostet haben.
 
 Zu Beginn gab es Schwierigkeiten mit CORS, was dazu führte, dass meine React-App keine Verbindung zur API herstellen konnte. Der Browser blockierte die Anfragen aufgrund von Sicherheitsvorgaben, weil die App und die API auf verschiedenen Domains liefen. Ich musste also sicherstellen, dass die API die richtigen CORS-Header sendet, um diese Anfragen zu erlauben. Nachdem ich diese Änderungen auf der Server-Seite vorgenommen hatte, konnte ich die API problemlos ansprechen.
 
@@ -117,8 +109,7 @@ Der Shop-Container war anfangs nicht optimal gestylt und sah ziemlich leer aus. 
 
 Am Ende des Tages funktionierte alles ziemlich gut. Die Login-Funktion wurde richtig integriert, der Shop wurde nur angezeigt, wenn der Benutzer eingeloggt war, und der Logout-Button tut genau das, was er soll. Ich habe gelernt, wie wichtig es ist, den Zustand in einer React-App richtig zu verwalten und wie man CORS-Probleme in den Griff bekommt, wenn man mit APIs arbeitet.
 
-20.11.2024 und 21.11.2024
-Passwortvalidierung angepasst. Bei der Registrierung werden jetzt nur interne Emailadressen (beispiel@at24intern.de) zugelassen. außerdem muss das passwort bestimmten Vorraussetzungen entsprechen: Ein Großbuchstabe, eine Zahl, ein Sonderzeichen und mindestens acht Zeichen lang.
+20.11.2024 und 21.11.2024 Passwortvalidierung angepasst. Bei der Registrierung werden jetzt nur interne Emailadressen (beispiel@at24intern.de) zugelassen. außerdem muss das passwort bestimmten Vorraussetzungen entsprechen: Ein Großbuchstabe, eine Zahl, ein Sonderzeichen und mindestens acht Zeichen lang.
 
 Heute habe ich viel versucht, um den Shop und die Login-Funktion zum Laufen zu bringen. Zuerst habe ich mich mit dem Shop beschäftigt, bei dem es darum ging, Produkte von der API abzurufen. Leider bekam ich immer die Fehlermeldung „Fehler beim Laden der Produkte“. Also habe ich den Code für die Shop-API überprüft und sichergestellt, dass der Token korrekt an die API übergeben wird. Aber das Problem blieb, und ich bekam weiterhin Fehler mit dem Token. Also musste ich mich der Middleware widmen.
 
@@ -126,8 +117,7 @@ In der Middleware ging es darum, das Token zu verifizieren, bevor ich auf die Sh
 
 Ich hatte Probleme mit der Login-API. Als ich den Code überprüfte, stellte sich heraus, dass ein kleiner Fehler vorlag. Ich versuchte, den Login-Flow zu debuggen, aber die Kommunikation mit der Datenbank lief nicht richtig, was dazu führte, dass ich ständig auf Fehlermeldungen stieß. Es war frustrierend, weil jeder Schritt, den ich machte, mehr Fehler nach sich zog.
 
-Am Ende des Tages war ich ziemlich erschöpft von all den Problemen und hatte das Gefühl, dass ich keine klaren Lösungen für die vielen Fehler gefunden habe. Es gab so viele einzelne Punkte, die nicht zusammenpassten, und es war schwer, alles zu koordinieren.
-Als ich das getestet habe, funktionierte die Anzeige der Produktdetails wie gewünscht – allerdings wurden die Produktbilder viel zu groß dargestellt.
+Am Ende des Tages war ich ziemlich erschöpft von all den Problemen und hatte das Gefühl, dass ich keine klaren Lösungen für die vielen Fehler gefunden habe. Es gab so viele einzelne Punkte, die nicht zusammenpassten, und es war schwer, alles zu koordinieren. Als ich das getestet habe, funktionierte die Anzeige der Produktdetails wie gewünscht – allerdings wurden die Produktbilder viel zu groß dargestellt.
 
 Um das zu lösen, habe ich mich mit dem CSS beschäftigt und die Größe der Bilder angepasst, damit sie als kleine Thumbnails angezeigt werden. Ich habe die maximale Breite der Bilder auf 150px gesetzt, sodass sie immer klein und gut proportioniert bleiben. Damit das Seitenverhältnis der Bilder nicht verzerrt wird, habe ich auch dafür gesorgt, dass die Höhe automatisch angepasst wird.
 

@@ -1,28 +1,28 @@
 #start {
-  position: relative; 
-  background-image: url('/public/images/bgr_home.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 100vh; 
-  display: flex; 
-  justify-content: center; 
-  align-items: center; 
-}
-
-.welcome-message {
-  text-align: center; 
-  color: white; 
-  max-width: 60%; 
-}
-
-.welcome-message h1 {
-  font-size: 2rem; 
-  margin: 0; 
-  color: white; 
-}
-
-.welcome-message p {
-  font-size: 1.2rem; 
-  margin-top: 10px; 
-}
+    position: relative; 
+    background-image: url('/public/images/bgr_home.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+  }
+  
+  .welcome-message {
+    text-align: center; 
+    color: white; 
+    max-width: 60%; 
+  }
+  
+  .welcome-message h1 {
+    font-size: 2rem; 
+    margin: 0; 
+    color: white; 
+  }
+  
+  .welcome-message p {
+    font-size: 1.2rem; 
+    margin-top: 10px; 
+  }

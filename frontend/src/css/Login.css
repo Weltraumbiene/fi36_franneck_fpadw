@@ -1,121 +1,121 @@
 /* Allgemeine Einstellungen */
 .login-section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: #f4f4f4;
-  padding: 20px;
-}
-
-.login-container {
-  width: 100%;
-  max-width: 400px;
-  background-color: white;
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 1.8rem;
-  color: #333;
-}
-
-/* Formular und Eingabefelder */
-.login-form {
-  display: flex;
-  flex-direction: column;
-}
-
-.login-form label {
-  font-size: 1rem;
-  margin-bottom: 5px;
-  color: #555;
-}
-
-.login-form input {
-  font-size: 1rem;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-sizing: border-box;
-}
-
-.login-form input:focus {
-  border-color: #007bff;
-  outline: none;
-}
-
-/* Button */
-.login-button {
-  background-color: #007bff;
-  color: white;
-  padding: 12px;
-  border: none;
-  border-radius: 5px;
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.login-button:hover {
-  background-color: #0056b3;
-}
-
-/* Erfolgs- und Fehlermeldungen */
-.login-message {
-  text-align: center;
-  margin-bottom: 15px;
-  padding: 10px;
-  border-radius: 5px;
-  font-size: 1rem;
-}
-
-.login-message.success {
-  background-color: #d4edda;
-  color: #155724;
-}
-
-.login-message.error {
-  background-color: #f8d7da;
-  color: #721c24;
-}
-/* Styling für den Registrieren-Button */
-.open-register-modal-button {
-background-color: #28a745; /* Frisches Grün */
-color: white; /* Weiße Schrift */
-padding: 10px 15px; /* Angenehmes Padding */
-font-size: 1rem; /* Größere Schrift */
-border: none; /* Kein Rahmen */
-border-radius: 5px; /* Abgerundete Ecken */
-cursor: pointer; /* Zeiger-Cursor bei Hover */
-transition: background-color 0.3s ease; /* Sanfter Hover-Effekt */
-}
-
-.open-register-modal-button:hover {
-background-color: #218838; /* Dunkleres Grün bei Hover */
-}
-.register-link {
-text-align: center; /* Zentriert den Text und den Button */
-margin-top: 20px; /* Abstand nach oben für bessere Lesbarkeit */
-}
-
-.open-register-modal-button {
-display: inline-block; /* Sicherstellt, dass der Button korrekt ausgerichtet wird */
-margin-top: 10px; /* Abstand zwischen Text und Button */
-}
-
-/* Zentrierung des Texts und des Buttons */
-.register-link {
-text-align: center; /* Zentriert den Text und den Button */
-margin-top: 20px; /* Abstand nach oben für bessere Lesbarkeit */
-}
-
-.open-register-modal-button {
-display: inline-block; /* Sicherstellt, dass der Button korrekt ausgerichtet wird */
-margin-top: 10px; /* Abstand zwischen Text und Button */
-}
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+    padding: 20px;
+  }
+  
+  .login-container {
+    width: 100%;
+    max-width: 400px;
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    color: #333;
+  }
+  
+  /* Formular und Eingabefelder */
+  .login-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .login-form label {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    color: #555;
+  }
+  
+  .login-form input {
+    font-size: 1rem;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  .login-form input:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  /* Button */
+  .login-button {
+    background-color: #007bff;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .login-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Erfolgs- und Fehlermeldungen */
+  .login-message {
+    text-align: center;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  
+  .login-message.success {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  
+  .login-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+  /* Styling für den Registrieren-Button */
+  .open-register-modal-button {
+  background-color: #28a745; /* Frisches Grün */
+  color: white; /* Weiße Schrift */
+  padding: 10px 15px; /* Angenehmes Padding */
+  font-size: 1rem; /* Größere Schrift */
+  border: none; /* Kein Rahmen */
+  border-radius: 5px; /* Abgerundete Ecken */
+  cursor: pointer; /* Zeiger-Cursor bei Hover */
+  transition: background-color 0.3s ease; /* Sanfter Hover-Effekt */
+  }
+  
+  .open-register-modal-button:hover {
+  background-color: #218838; /* Dunkleres Grün bei Hover */
+  }
+  .register-link {
+  text-align: center; /* Zentriert den Text und den Button */
+  margin-top: 20px; /* Abstand nach oben für bessere Lesbarkeit */
+  }
+  
+  .open-register-modal-button {
+  display: inline-block; /* Sicherstellt, dass der Button korrekt ausgerichtet wird */
+  margin-top: 10px; /* Abstand zwischen Text und Button */
+  }
+  
+  /* Zentrierung des Texts und des Buttons */
+  .register-link {
+  text-align: center; /* Zentriert den Text und den Button */
+  margin-top: 20px; /* Abstand nach oben für bessere Lesbarkeit */
+  }
+  
+  .open-register-modal-button {
+  display: inline-block; /* Sicherstellt, dass der Button korrekt ausgerichtet wird */
+  margin-top: 10px; /* Abstand zwischen Text und Button */
+  }
