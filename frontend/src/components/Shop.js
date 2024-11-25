@@ -158,6 +158,7 @@ const Shop = ({ isLoggedIn, setIsLoggedIn, setCurrentPage }) => {
         <div className="shop-container">
             {isLoggedIn ? (
                 <>
+                    <h1></h1>
                     <h1>Willkommen im Shop!</h1>
                     <p>Hallo {userEmail}! Deine Benutzer-ID ist: {userId}</p>
 
@@ -166,7 +167,7 @@ const Shop = ({ isLoggedIn, setIsLoggedIn, setCurrentPage }) => {
                             Warenkorb ({cart.length})
                         </button>
                         <button className="checkout-button" onClick={handleCheckout}>
-                            Zur Kasse
+                            Bestellung bestätigen
                         </button>
                         <button className="logout-button" onClick={handleLogout}>
                             Abmelden
@@ -210,7 +211,6 @@ const Shop = ({ isLoggedIn, setIsLoggedIn, setCurrentPage }) => {
                                 <p className="product-price">
                                     Preis: {Number(modalProduct.price).toFixed(2)} €
                                 </p>
-                                <p>Verfügbar: {modalProduct.quantity} Stück</p>
                                 <button className="shop-button" onClick={addToCart}>
                                     In den Warenkorb
                                 </button>
@@ -221,14 +221,16 @@ const Shop = ({ isLoggedIn, setIsLoggedIn, setCurrentPage }) => {
                     {showCartModal && (
                         <div className="cart-modal-overlay show">
                             <div className="cart-modal-content">
-                                <button className="cart-modal-close" onClick={closeCartModal}>
-                                    ×
-                                </button>
-                                <h2>Warenkorb von {userEmail} (User ID: {userId})</h2>
+                                <h1>Warenkorb</h1>
 
                                 {cart.length === 0 ? (
-                                    <p>Der Warenkorb ist leer.</p>
-                                ) : (
+    <>
+        <p>Der Warenkorb ist leer.</p>
+        <button className="cart-modal-close" onClick={closeCartModal}>
+            Warenkorb schließen
+        </button>
+    </>
+) : (
                                     <>
                                         <ul className="cart-list">
                                             {cart.map((item, index) => (
@@ -265,8 +267,16 @@ const Shop = ({ isLoggedIn, setIsLoggedIn, setCurrentPage }) => {
                                             ))}
                                         </ul>
                                         <div className="cart-total">
-                                            <strong>Gesamtpreis: {calculateTotal()} €</strong>
+                                            <h6>Gesamtpreis: {calculateTotal()} €</h6>
                                         </div>
+                                        <p></p>
+                                        <button className="checkout-button" onClick={handleCheckout}>
+                            Bestellung bestätigen
+                        </button>
+                        <p></p>
+                        <button className="cart-modal-close" onClick={closeCartModal}>
+                                    Warenkorb schließen
+                                </button>
                                     </>
                                 )}
                             </div>
