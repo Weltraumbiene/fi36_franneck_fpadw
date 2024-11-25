@@ -255,3 +255,48 @@ button:hover {
     font-weight: bold;
     text-align: right;
 }
+
+/* Warenkorb-Titel */
+.cart-title {
+    font-size: 16px; /* Kleinere Schriftgröße */
+    color: #555; /* Dezentere Farbe */
+    margin-bottom: 15px; /* Abstand nach unten */
+    text-align: center; /* Zentrierung */
+}
+
+/* Checkout-Button im Warenkorb */
+.checkout-button {
+    display: block; /* Vollständige Breite */
+    margin: 20px auto 0; /* Zentriert und Abstand nach oben */
+    max-width: 200px; /* Breite begrenzen */
+}
+
+/* Neuer Button-Hover-Effekt */
+button:hover {
+    transform: scale(1.08);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Produktkarte Hover */
+.product-card:hover {
+    transform: scale(1.05);
+    border: 2px solid #3498db; /* Modernere Farbgebung */
+}
+
+/* Schatten für Produktkarten */
+.product-card {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Verbesserte Modal-Struktur */
+.shop-modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Responsive Grid */
+.product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+}
