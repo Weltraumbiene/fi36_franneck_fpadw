@@ -74,8 +74,9 @@ const Register = ({ onClose }) => {
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         {/* Schließen-Button */}
         <button className="close-button" onClick={onClose}>
-          &times;
+        Schließen
         </button>
+
         <h1>Registrieren</h1>
 
         {/* Statusnachricht */}
