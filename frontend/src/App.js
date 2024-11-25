@@ -18,8 +18,8 @@ const App = () => {
         return <Home />;
       case 'login':
         return <Login setIsLoggedIn={setIsLoggedIn} setCurrentPage={setCurrentPage} />; // `setCurrentPage` übergeben
-      case 'shop':
-        return <Shop isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />;
+        case 'shop':
+          return <Shop isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setCurrentPage={setCurrentPage} />;
       case 'contact':
         return <Contact />;
       case 'imprint':
