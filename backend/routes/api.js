@@ -107,9 +107,9 @@ router.post('/checkout', async (req, res) => {
         // Beginn einer Transaktion, um sicherzustellen, dass alle Operationen atomar ausgeführt werden
         await connection.beginTransaction();
 
-        // Speichere die Bestellung in der `orders`-Tabelle
+        // Speichere die Bestellung in der `order`-Tabelle (nicht mehr `orders`)
         await connection.query(
-            'INSERT INTO orders (order_id, user_id, email, order_date, total_price) VALUES (?, ?, ?, ?, ?)',
+            'INSERT INTO `order` (order_id, user_id, email, order_date, total_price) VALUES (?, ?, ?, ?, ?)',
             [orderId, userId, email, orderDate, totalPrice]
         );
 

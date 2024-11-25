@@ -115,12 +115,10 @@ const Shop = ({ isLoggedIn, setIsLoggedIn, setCurrentPage }) => {
             return;
         }
     
-        // Erzeuge eine eindeutige Bestellnummer (order_id)
         const orderId = `ORDER-${new Date().toISOString().replace(/[-:.TZ]/g, '').slice(0, 12)}-${Math.floor(Math.random() * 1000).toString().padStart(4, '0')}`;
     
         const orderDate = new Date().toISOString();
     
-        // Formatiere die Bestellinformationen
         const orderItems = cart.map(item => ({
             order_id: orderId,
             user_id: userId,
@@ -134,7 +132,6 @@ const Shop = ({ isLoggedIn, setIsLoggedIn, setCurrentPage }) => {
         }));
     
         try {
-            // API-Aufruf zum Senden der Bestellung
             const response = await fetch('http://bcf.mshome.net:4000/api/checkout', {
                 method: 'POST',
                 headers: {
@@ -146,7 +143,7 @@ const Shop = ({ isLoggedIn, setIsLoggedIn, setCurrentPage }) => {
             if (response.ok) {
                 const data = await response.json();
                 alert(`Bestellung erfolgreich abgeschlossen! Bestellnummer: ${orderId}`);
-                setCart([]); // Leere den Warenkorb nach erfolgreicher Bestellung
+                setCart([]);
             } else {
                 throw new Error('Fehler beim Abschließen der Bestellung');
             }
