@@ -1,6 +1,11 @@
 import express from 'express';
 import pool from './db.js'; // Verwende deinen DB-Pool
 import { verifyToken } from './middleware.js'; // Token Verifizierung
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import secrets from './secrets.js';
+
+
 
 const router = express.Router();
 

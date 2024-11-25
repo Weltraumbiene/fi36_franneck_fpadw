@@ -65,16 +65,21 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 .shop-container .product-card:hover {
     transform: scale(1.05);
 }
 
-/* Produktbild */
+/* Einheitliche Größe für Produktbilder */
 .shop-container .product-image {
-    width: 100%;
-    height: auto;
+    width: 200px; /* Einheitliche Breite */
+    height: 200px; /* Einheitliche Höhe */
+    object-fit: cover; /* Zuschneiden, falls nötig */
     border-radius: 8px;
 }
 
@@ -82,16 +87,14 @@
 .shop-container .product-title {
     font-size: 1.2rem;
     color: #333;
-    text-align: center;
     margin-top: 15px;
+    margin-bottom: 5px;
 }
 
 /* Produktpreis */
 .shop-container .product-price {
     font-size: 1rem;
     color: #555;
-    text-align: center;
-    margin-top: 10px;
 }
 
 /* Modal für Produktdetails */

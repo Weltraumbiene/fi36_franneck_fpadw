@@ -3,6 +3,7 @@ import cors from 'cors';
 import apiRouter from './routes/api.js'; 
 import contactAPIRouter from './routes/ContactAPI.js'; 
 import loginRouter from './routes/LoginAPI.js'; 
+import jwt from 'jsonwebtoken';
 
 const app = express();
 
