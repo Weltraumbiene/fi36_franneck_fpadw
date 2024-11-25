@@ -91,23 +91,64 @@ router.post('/checkout', async (req, res) => {
         return res.status(400).json({ message: 'Keine Bestellartikel übermittelt' });
     }
 
+    const orderId = orderItems[0].order_id; // Einheitliche Bestellnummer für alle Artikel
+    const userId = orderItems[0].user_id;
+    const email = orderItems[0].email;
+
+    // Konvertiere `order_date` ins richtige Format für MySQL
+    const orderDate = new Date(orderItems[0].order_date).toISOString().slice(0, 19).replace('T', ' ');
+
+    // Berechne den Gesamtpreis der Bestellung
+    const totalPrice = orderItems.reduce((sum, item) => sum + parseFloat(item.total_price), 0);
+
+    const connection = await pool.getConnection();
+
     try {
-        const connection = await pool.getConnection(); // Hole eine Verbindung aus dem Pool
-        const queries = orderItems.map(item => {
-            return connection.execute(
-                `INSERT INTO order_item (user_id, email, product_id, title, price, quantity, total_price)
-                 VALUES (?, ?, ?, ?, ?, ?, ?)`,
-                [item.user_id, item.email, item.product_id, item.title, item.price, item.quantity, item.total_price]
+        // Beginn einer Transaktion, um sicherzustellen, dass alle Operationen atomar ausgeführt werden
+        await connection.beginTransaction();
+
+        // Speichere die Bestellung in der `orders`-Tabelle
+        await connection.query(
+            'INSERT INTO orders (order_id, user_id, email, order_date, total_price) VALUES (?, ?, ?, ?, ?)',
+            [orderId, userId, email, orderDate, totalPrice]
+        );
+
+        // Speichere die Artikel in der `order_item`-Tabelle
+        const orderItemQueries = orderItems.map(item => {
+            return connection.query(
+                `INSERT INTO order_item (order_id, user_id, email, order_date, product_id, title, price, quantity, total_price)
+                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+                [
+                    item.order_id,
+                    item.user_id,
+                    item.email,
+                    orderDate, // Hier das umgewandelte `order_date` verwenden
+                    item.product_id,
+                    item.title,
+                    item.price,
+                    item.quantity,
+                    item.total_price,
+                ]
             );
         });
 
-        await Promise.all(queries); // Führe alle Abfragen parallel aus
-        res.status(200).json({ message: 'Bestellung erfolgreich gespeichert' });
+        await Promise.all(orderItemQueries);
 
-        connection.release(); // Gebe die Verbindung wieder frei
+        // Commit der Transaktion nach erfolgreichem Abschluss aller Queries
+        await connection.commit();
+
+        res.status(201).json({
+            message: 'Bestellung erfolgreich erstellt',
+            orderId,
+            totalPrice: totalPrice.toFixed(2),
+        });
     } catch (error) {
-        console.error('Fehler bei der Bestellung:', error);
+        // Rollback der Transaktion bei Fehlern, um inkonsistente Zustände zu vermeiden
+        await connection.rollback();
+        console.error('Fehler beim Speichern der Bestellung:', error);
         res.status(500).json({ message: 'Fehler beim Speichern der Bestellung' });
+    } finally {
+        connection.release(); // Gib die Datenbankverbindung zurück
     }
 });
 

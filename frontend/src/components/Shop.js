@@ -114,18 +114,27 @@ const Shop = ({ isLoggedIn, setIsLoggedIn, setCurrentPage }) => {
             alert('Ihr Warenkorb ist leer. Bitte fügen Sie Produkte hinzu.');
             return;
         }
-
+    
+        // Erzeuge eine eindeutige Bestellnummer (order_id)
+        const orderId = `ORDER-${new Date().toISOString().replace(/[-:.TZ]/g, '').slice(0, 12)}-${Math.floor(Math.random() * 1000).toString().padStart(4, '0')}`;
+    
+        const orderDate = new Date().toISOString();
+    
+        // Formatiere die Bestellinformationen
         const orderItems = cart.map(item => ({
+            order_id: orderId,
             user_id: userId,
             email: userEmail,
+            order_date: orderDate,
             product_id: item.product_id,
             title: item.title,
             price: Number(item.price),
             quantity: item.quantity,
             total_price: (Number(item.price) * item.quantity).toFixed(2),
         }));
-
+    
         try {
+            // API-Aufruf zum Senden der Bestellung
             const response = await fetch('http://bcf.mshome.net:4000/api/checkout', {
                 method: 'POST',
                 headers: {
@@ -133,10 +142,11 @@ const Shop = ({ isLoggedIn, setIsLoggedIn, setCurrentPage }) => {
                 },
                 body: JSON.stringify({ orderItems }),
             });
-
+    
             if (response.ok) {
-                alert('Bestellung erfolgreich abgeschlossen!');
-                setCart([]);
+                const data = await response.json();
+                alert(`Bestellung erfolgreich abgeschlossen! Bestellnummer: ${orderId}`);
+                setCart([]); // Leere den Warenkorb nach erfolgreicher Bestellung
             } else {
                 throw new Error('Fehler beim Abschließen der Bestellung');
             }
@@ -145,6 +155,7 @@ const Shop = ({ isLoggedIn, setIsLoggedIn, setCurrentPage }) => {
             alert('Beim Abschluss der Bestellung ist ein Fehler aufgetreten.');
         }
     };
+    
 
     return (
         <div className="shop-container">
