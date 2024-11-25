@@ -224,13 +224,13 @@ const Shop = ({ isLoggedIn, setIsLoggedIn, setCurrentPage }) => {
                                 <h1>Warenkorb</h1>
 
                                 {cart.length === 0 ? (
-    <>
-        <p>Der Warenkorb ist leer.</p>
-        <button className="cart-modal-close" onClick={closeCartModal}>
-            Warenkorb schließen
-        </button>
-    </>
-) : (
+                                    <>
+                                        <p>Der Warenkorb ist leer.</p>
+                                        <button className="cart-modal-close" onClick={closeCartModal}>
+                                            Warenkorb schließen
+                                        </button>
+                                    </>
+                                        ) : (
                                     <>
                                         <ul className="cart-list">
                                             {cart.map((item, index) => (
