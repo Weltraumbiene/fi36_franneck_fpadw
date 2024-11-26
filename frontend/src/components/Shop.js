@@ -172,6 +172,12 @@ const Shop = ({ isLoggedIn, setIsLoggedIn, setCurrentPage }) => {
                         <button className="logout-button" onClick={handleLogout}>
                             Abmelden
                         </button>
+                        {userEmail === 'admin@at24intern.de' && (
+                        <button className="admin-button" style={{ backgroundColor: 'red', color: 'white' }}>
+                        Admin
+                        </button>
+                        )}
+
                     </div>
 
                     <div className="product-grid">
