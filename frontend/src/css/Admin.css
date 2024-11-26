@@ -3,9 +3,9 @@
     font-family: Arial, sans-serif;
     margin: 20px;
     padding: 20px;
-    background-color: #f9f9f9;
+    background-color: #f4f4f4; /* Hintergrundfarbe an Login.css angepasst */
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sanfterer Schatten */
 }
 
 /* Überschrift des Admin-Bereichs */
@@ -21,13 +21,13 @@
     font-size: 1.5rem;
     color: #333;
     margin-bottom: 15px;
-    border-bottom: 2px solid #007bff;
+    border-bottom: 2px solid #007bff; /* Blau an die Login-Seite anpassen */
     padding-bottom: 5px;
 }
 
 /* Styling für Buttons */
 .admin-container button {
-    background-color: #007bff;
+    background-color: #007bff; /* Ähnlich wie bei der Login-Seite */
     color: white;
     padding: 10px 20px;
     border: none;
@@ -39,12 +39,12 @@
 }
 
 .admin-container button:hover {
-    background-color: #0056b3;
+    background-color: #0056b3; /* Dunklerer Blau bei Hover */
 }
 
 /* Pre-Tag für das Anzeigen von Nachrichten und Bestellungen */
 .admin-container pre {
-    background-color: #f4f4f4;
+    background-color: #f9f9f9; /* Etwas helleres Grau für die Anzeige */
     padding: 15px;
     border-radius: 5px;
     font-size: 1rem;
@@ -78,6 +78,12 @@
     font-size: 1rem;
 }
 
+.admin-inputs input:focus,
+.admin-inputs textarea:focus {
+    border-color: #007bff; /* Fokusfarbe für Eingabefelder */
+    outline: none;
+}
+
 /* Container für Produkt-, Bestell- und Nachrichten-Daten */
 .data-container {
     margin-top: 30px;
@@ -87,13 +93,13 @@
     font-size: 1.5rem;
     color: #333;
     margin-bottom: 15px;
-    border-bottom: 2px solid #28a745;
+    border-bottom: 2px solid #28a745; /* Grün für den Erfolg */
     padding-bottom: 5px;
 }
 
 /* Container für API-Daten (Nachrichten, Bestellungen) */
 .data-container pre {
-    background-color: #e9f7ef;
+    background-color: #e9f7ef; /* Helles Grün für API-Daten */
     padding: 15px;
     border-radius: 5px;
     font-size: 1rem;
@@ -107,23 +113,11 @@
 /* Styling für Fehlermeldungen oder Alerts */
 .alert {
     padding: 10px;
-    background-color: #f8d7da;
+    background-color: #f8d7da; /* Wie bei der Login-Seite */
     color: #721c24;
     border: 1px solid #f5c6cb;
     border-radius: 5px;
     margin-top: 20px;
-}
-/* Styling für die Nachrichten und Bestellungen */
-.data-container {
-    margin-top: 30px;
-}
-
-.data-container h2 {
-    font-size: 1.5rem;
-    color: #333;
-    margin-bottom: 15px;
-    border-bottom: 2px solid #28a745;
-    padding-bottom: 5px;
 }
 
 /* Kartenansicht für Nachrichten */
@@ -137,12 +131,12 @@
     background-color: #ffffff;
     padding: 15px;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sanfterer Schatten */
 }
 
 .message-card h3, .order-card h3 {
     font-size: 1.2rem;
-    color: #007bff;
+    color: #007bff; /* Blau wie bei der Login-Seite */
 }
 
 .message-card p, .order-card p {
@@ -160,3 +154,39 @@ p {
     font-size: 1.2rem;
     color: #777;
 }
+
+/* Neue Regel für die vertikale Liste */
+.dropdown-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .admin-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .data-container {
+    margin-top: 20px;
+  }
+  
+  .message-card, .order-card {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  button {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  

@@ -81,7 +81,7 @@ router.get('/orders', async (req, res) => {
     try {
         const results = await pool.query(`
             SELECT o.order_id, o.email, o.order_date, o.total_price, 
-                   GROUP_CONCAT(oi.title SEPARATOR ', ') AS products 
+                   GROUP_CONCAT(CONCAT(oi.title, ' (Menge: ', oi.quantity, ')') SEPARATOR ', ') AS products 
             FROM \`order\` o
             JOIN order_item oi ON o.order_id = oi.order_id
             GROUP BY o.order_id
