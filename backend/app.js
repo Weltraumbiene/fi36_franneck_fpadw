@@ -20,8 +20,7 @@ app.use(cors(corsOptions)); // CORS für alle Routen aktivieren
 app.use(express.json()); // Middleware für JSON Parsing in Anfragen
 
 import dotenv from 'dotenv';
-dotenv.config(); // Lädt die .env-Datei
-
+dotenv.config(); 
 // API-Routen
 app.use('/api/login', loginRouter);
 app.use('/api', apiRouter);

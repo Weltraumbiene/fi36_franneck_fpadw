@@ -1,16 +1,16 @@
 .footer {
-    text-align: center; /* Zentriert den Text horizontal */
-    font-size: 10px; /* Schriftgröße auf 10px einstellen */
-    background-color: #333; /* Optional: Hintergrundfarbe passend zum Header */
-    color: white; /* Textfarbe */
-    padding: 20px 0; /* Abstand oben und unten */
-    position: fixed; /* Fixiert den Footer unten */
-    width: 100%; /* Footer über die gesamte Breite */
-    bottom: 0; /* Footer immer am unteren Rand */
-    opacity: 0; /* Anfangs unsichtbar */
-    transition: opacity 0.5s ease; /* Sanftes Einblenden des Footers */
+    text-align: center; 
+    font-size: 10px; 
+    background-color: #333; 
+    color: white; 
+    padding: 20px 0; 
+    position: fixed; 
+    width: 100%; 
+    bottom: 0; 
+    opacity: 0; 
+    transition: opacity 0.5s ease; 
   }
   
   .footer.visible {
-    opacity: 1; /* Footer wird sichtbar, wenn der Benutzer unten ist */
+    opacity: 1; 
   }

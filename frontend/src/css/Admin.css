@@ -3,9 +3,9 @@
     font-family: Arial, sans-serif;
     margin: 20px;
     padding: 20px;
-    background-color: #f4f4f4; /* Hintergrundfarbe an Login.css angepasst */
+    background-color: #f4f4f4; 
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sanfterer Schatten */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
 }
 
 /* Überschrift des Admin-Bereichs */
@@ -21,13 +21,13 @@
     font-size: 1.5rem;
     color: #333;
     margin-bottom: 15px;
-    border-bottom: 2px solid #007bff; /* Blau an die Login-Seite anpassen */
+    border-bottom: 2px solid #007bff; 
     padding-bottom: 5px;
 }
 
 /* Styling für Buttons */
 .admin-container button {
-    background-color: #007bff; /* Ähnlich wie bei der Login-Seite */
+    background-color: #007bff; 
     color: white;
     padding: 10px 20px;
     border: none;
@@ -39,12 +39,12 @@
 }
 
 .admin-container button:hover {
-    background-color: #0056b3; /* Dunklerer Blau bei Hover */
+    background-color: #0056b3; 
 }
 
 /* Pre-Tag für das Anzeigen von Nachrichten und Bestellungen */
 .admin-container pre {
-    background-color: #f9f9f9; /* Etwas helleres Grau für die Anzeige */
+    background-color: #f9f9f9; 
     padding: 15px;
     border-radius: 5px;
     font-size: 1rem;
@@ -80,7 +80,7 @@
 
 .admin-inputs input:focus,
 .admin-inputs textarea:focus {
-    border-color: #007bff; /* Fokusfarbe für Eingabefelder */
+    border-color: #007bff; 
     outline: none;
 }
 
@@ -93,13 +93,13 @@
     font-size: 1.5rem;
     color: #333;
     margin-bottom: 15px;
-    border-bottom: 2px solid #28a745; /* Grün für den Erfolg */
+    border-bottom: 2px solid #28a745; 
     padding-bottom: 5px;
 }
 
 /* Container für API-Daten (Nachrichten, Bestellungen) */
 .data-container pre {
-    background-color: #e9f7ef; /* Helles Grün für API-Daten */
+    background-color: #e9f7ef; 
     padding: 15px;
     border-radius: 5px;
     font-size: 1rem;
@@ -113,7 +113,7 @@
 /* Styling für Fehlermeldungen oder Alerts */
 .alert {
     padding: 10px;
-    background-color: #f8d7da; /* Wie bei der Login-Seite */
+    background-color: #f8d7da; 
     color: #721c24;
     border: 1px solid #f5c6cb;
     border-radius: 5px;
@@ -136,7 +136,7 @@
 
 .message-card h3, .order-card h3 {
     font-size: 1.2rem;
-    color: #007bff; /* Blau wie bei der Login-Seite */
+    color: #007bff; 
 }
 
 .message-card p, .order-card p {

@@ -7,7 +7,7 @@ import Login from './components/Login';
 import Shop from './components/Shop';
 import Contact from './components/Contact';
 import Imprint from './components/Imprint';
-import Admin from './components/Admin'; // Admin-Komponente importieren
+import Admin from './components/Admin'; // 
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Login-Status
@@ -25,7 +25,7 @@ const App = () => {
         return <Contact />;
       case 'imprint':
         return <Imprint />;
-      case 'admin': // Neue Seite für Admin
+      case 'admin': 
         return <Admin />;
       default:
         return <Home />;

@@ -3,24 +3,24 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh; /* Vertikale Zentrierung */
-    background-color: #f4f4f4; /* Hintergrundfarbe der Seite */
+    min-height: 100vh; 
+    background-color: #f4f4f4; 
     padding: 20px;
 }
 
 /* Kontaktformular Container */
 .contact-container {
     width: 100%;
-    max-width: 400px; /* Gleiche Breite wie das Login-Formular */
-    margin: 50px auto 0 auto; /* Erhöht den Abstand nach oben, angepasst für ein kompakteres Formular */
+    max-width: 400px; 
+    margin: 50px auto 0 auto; 
 }
 
 /* Kontaktformular Card */
 .contact-card {
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); /* Sanfter Schatten */
-    padding: 20px; /* Weniger Padding für kompakteres Formular */
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); 
+    padding: 20px; 
     width: 100%;
     box-sizing: border-box;
     transition: all 0.3s ease-in-out;
@@ -29,15 +29,15 @@
 /* Titel */
 .contact-card h2 {
     text-align: center;
-    font-size: 1.6rem; /* Kleinere Schriftgröße für den Titel */
-    margin-bottom: 15px; /* Reduzierter Abstand */
+    font-size: 1.6rem; 
+    margin-bottom: 15px; 
     color: #333;
 }
 
 /* Formulareingabefelder */
 .contact-card label {
     font-size: 1rem;
-    margin-bottom: 3px; /* Kleinerer Abstand */
+    margin-bottom: 3px; 
     display: block;
     color: #555;
 }
@@ -45,56 +45,56 @@
 .contact-card input,
 .contact-card textarea {
     font-size: 1rem;
-    padding: 8px; /* Weniger Padding für kompaktere Felder */
+    padding: 8px; 
     width: 100%;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
-    margin-bottom: 15px; /* Reduzierter Abstand zwischen den Feldern */
+    margin-bottom: 15px; 
     transition: border-color 0.3s ease-in-out;
 }
 
 .contact-card input:focus,
 .contact-card textarea:focus {
-    border-color: #007bff; /* Farbe der Grenze bei Fokus */
-    outline: none; /* Entfernen des Standardrahmens */
+    border-color: #007bff; 
+    outline: none; 
 }
 
 /* Textarea */
 .contact-card textarea {
-    resize: none; /* Verhindert Größenänderungen */
-    height: 150px; /* Kleinere Höhe für die Textarea */
+    resize: none; 
+    height: 150px; 
     width: 100%;
 }
 
 /* Button */
 .contact-card button {
     font-size: 1.1rem;
-    background-color: #007bff; /* Blaue Hintergrundfarbe */
+    background-color: #007bff; 
     color: #fff;
     border: none;
     border-radius: 5px;
-    padding: 10px; /* Weniger Padding für den Button */
+    padding: 10px; 
     width: 100%;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 .contact-card button:hover {
-    background-color: #0056b3; /* Dunklerer Blauton beim Hover */
+    background-color: #0056b3; 
 }
 
 /* Statusmeldung */
 .contact-card p {
     text-align: center;
     font-size: 1rem;
-    color: #d9534f; /* Standard-Fehlermeldung */
+    color: #d9534f; 
 }
 
 .contact-card p.success {
-    color: #5bc0de; /* Erfolgreiche Nachricht */
+    color: #5bc0de; 
 }
 
 .contact-card p.error {
-    color: #d9534f; /* Fehlermeldung */
+    color: #d9534f; 
 }

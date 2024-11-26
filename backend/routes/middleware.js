@@ -10,9 +10,9 @@ export const verifyToken = (req, res, next) => {
     }
 
     try {
-        const decoded = jwt.verify(token, secrets.jwt_secret_key); // JWT verifizieren
+        const decoded = jwt.verify(token, secrets.jwt_secret_key); 
         req.user = decoded; // Benutzerdaten an die Anfrage anhängen
-        next(); // Weiter zur nächsten Middleware oder Route
+        next(); 
     } catch (error) {
         return res.status(401).json({ message: 'Ungültiges oder abgelaufenes Token' });
     }

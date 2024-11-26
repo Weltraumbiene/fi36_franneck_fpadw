@@ -2,8 +2,8 @@ import express from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import mariadb from 'mariadb';
-import secrets from './secrets.js';  // Geheimschlüssel und DB-Daten
-import { body, validationResult } from 'express-validator';  // Für die Eingabevalidierung
+import secrets from './secrets.js';  
+import { body, validationResult } from 'express-validator';  
 
 const router = express.Router();
 

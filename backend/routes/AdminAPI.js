@@ -1,6 +1,6 @@
 import express from 'express';
-import pool from './db.js'; // Pool aus separater Datei (MariaDB-Instanz)
-import { body, validationResult } from 'express-validator'; // Eingabevalidierung
+import pool from './db.js'; 
+import { body, validationResult } from 'express-validator'; 
 
 const router = express.Router();
 
@@ -25,7 +25,7 @@ router.post(
                 [title, description, price, image, quantity]
             );
             // Konvertiere insertId von BigInt in eine normale Zahl
-            const productId = result.insertId.toString(); // Umwandlung zu String, falls du den Wert als ID weitergeben möchtest
+            const productId = result.insertId.toString(); // Umwandlung zu String
             res.status(201).json({ success: true, message: 'Produkt erfolgreich erstellt.', productId: productId });
         } catch (error) {
             console.error('Fehler beim Erstellen des Produkts:', error.message);

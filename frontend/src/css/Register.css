@@ -95,12 +95,12 @@
     right: 15px;
     background: transparent;
     border: none;
-    font-size: 10px; /* Schriftgröße auf 10px setzen */
+    font-size: 10px; 
     cursor: pointer;
-    color: #333; /* Optional: Farbe des Textes */
+    color: #333; 
   }
   
-  /* Formular-Styling bleibt wie es ist */
+  /* Formular-Styling  */
   .register-form label,
   .register-form input,
   .register-button {

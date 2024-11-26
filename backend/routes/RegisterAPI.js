@@ -1,7 +1,7 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
 import mariadb from 'mariadb';
-import secrets from './secrets.js';  // Enthält deine DB- und JWT-Settings
+import secrets from './secrets.js';  
 
 const router = express.Router();
 const pool = mariadb.createPool({

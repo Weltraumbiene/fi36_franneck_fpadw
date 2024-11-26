@@ -2,8 +2,8 @@ import express from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import mariadb from 'mariadb';
-import secrets from './secrets.js';  // Geheimschlüssel und DB-Daten
-import { body, validationResult } from 'express-validator';  // Für die Eingabevalidierung
+import secrets from './secrets.js';  
+import { body, validationResult } from 'express-validator';  
 
 const router = express.Router();
 
@@ -24,7 +24,7 @@ router.get('/api/products', async (req, res) => {
         connection.release();
   
         res.setHeader('Content-Type', 'application/json');
-        res.json(products); // Gibt die Produkte als JSON zurück
+        res.json(products); 
     } catch (error) {
         console.error('Fehler beim Abrufen der Produkte:', error);
         res.status(500).json({ error: 'Fehler beim Abrufen der Produkte' });
@@ -34,7 +34,7 @@ router.get('/api/products', async (req, res) => {
 // Warenkorb in der Session speichern (wenn der Benutzer eingeloggt ist)
 router.post('/api/cart', (req, res) => {
     if (!req.session.cart) {
-        req.session.cart = []; // Initialisiere den Warenkorb, falls er noch nicht existiert
+        req.session.cart = []; 
     }
 
     const { productId, quantity } = req.body;

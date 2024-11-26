@@ -22,7 +22,7 @@
   }
   
   .scroll-up {
-    bottom: 80px; /* Platz für den unteren Button */
+    bottom: 80px; 
   }
   
   .scroll-down {
@@ -49,7 +49,7 @@
     cursor: pointer;
     font-size: 1.5rem;
     text-decoration: none;
-    transition: opacity 0.5s ease;  /* Übergang für das Ausblenden */
+    transition: opacity 0.5s ease;  
     z-index: 1000;
   }
   
@@ -63,6 +63,6 @@
   
   .scroll-button.hidden {
     opacity: 0;
-    pointer-events: none; /* Verhindert, dass der Button noch geklickt werden kann */
+    pointer-events: none; 
   }
   

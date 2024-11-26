@@ -77,9 +77,9 @@
 
 /* Einheitliche Größe für Produktbilder */
 .shop-container .product-image {
-    width: 200px; /* Einheitliche Breite */
-    height: 200px; /* Einheitliche Höhe */
-    object-fit: cover; /* Zuschneiden, falls nötig */
+    width: 200px; 
+    height: 200px; 
+    object-fit: cover; 
     border-radius: 8px;
 }
 

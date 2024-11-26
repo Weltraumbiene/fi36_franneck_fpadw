@@ -1,6 +1,6 @@
 import express from 'express';
-import pool from './db.js'; // Verwende deinen DB-Pool
-import { verifyToken } from './middleware.js'; // Token Verifizierung
+import pool from './db.js'; 
+import { verifyToken } from './middleware.js'; 
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import secrets from './secrets.js';
@@ -80,8 +80,8 @@ router.get('/profile', verifyToken, async (req, res) => {
 router.get('/products', async (req, res) => {
     try {
         const products = await pool.query('SELECT * FROM product');
-        res.setHeader('Content-Type', 'application/json'); // JSON-Header setzen
-        res.json(products); // Produktdaten als JSON zurückgeben
+        res.setHeader('Content-Type', 'application/json'); 
+        res.json(products); 
     } catch (error) {
         console.error('Fehler beim Abrufen der Produkte:', error.message);
         res.status(500).json({ error: 'Fehler beim Abrufen der Produkte' });
@@ -100,25 +100,22 @@ router.post('/checkout', async (req, res) => {
     const userId = orderItems[0].user_id;
     const email = orderItems[0].email;
 
-    // Konvertiere `order_date` ins richtige Format für MySQL
+    // Konvertiert `order_date` ins richtige Format für MySQL
     const orderDate = new Date(orderItems[0].order_date).toISOString().slice(0, 19).replace('T', ' ');
 
-    // Berechne den Gesamtpreis der Bestellung
+    // Berechnet den Gesamtpreis der Bestellung
     const totalPrice = orderItems.reduce((sum, item) => sum + parseFloat(item.total_price), 0);
 
     const connection = await pool.getConnection();
 
     try {
-        // Beginn einer Transaktion, um sicherzustellen, dass alle Operationen atomar ausgeführt werden
         await connection.beginTransaction();
 
-        // Speichere die Bestellung in der `order`-Tabelle (nicht mehr `orders`)
         await connection.query(
             'INSERT INTO `order` (order_id, user_id, email, order_date, total_price) VALUES (?, ?, ?, ?, ?)',
             [orderId, userId, email, orderDate, totalPrice]
         );
 
-        // Speichere die Artikel in der `order_item`-Tabelle
         const orderItemQueries = orderItems.map(item => {
             return connection.query(
                 `INSERT INTO order_item (order_id, user_id, email, order_date, product_id, title, price, quantity, total_price)
@@ -127,7 +124,7 @@ router.post('/checkout', async (req, res) => {
                     item.order_id,
                     item.user_id,
                     item.email,
-                    orderDate, // Hier das umgewandelte `order_date` verwenden
+                    orderDate, 
                     item.product_id,
                     item.title,
                     item.price,

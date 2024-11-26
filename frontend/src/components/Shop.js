@@ -141,7 +141,6 @@ const Shop = ({ isLoggedIn, setIsLoggedIn, setCurrentPage }) => {
             });
     
             if (response.ok) {
-                const data = await response.json();
                 alert(`Bestellung erfolgreich abgeschlossen! Bestellnummer: ${orderId}`);
                 setCart([]);
             } else {
@@ -152,13 +151,11 @@ const Shop = ({ isLoggedIn, setIsLoggedIn, setCurrentPage }) => {
             alert('Beim Abschluss der Bestellung ist ein Fehler aufgetreten.');
         }
     };
-    
 
     return (
         <div className="shop-container">
             {isLoggedIn ? (
                 <>
-                    <h1></h1>
                     <h1>Willkommen im Shop!</h1>
                     <p>Hallo {userEmail}! Deine Benutzer-ID ist: {userId}</p>
 
@@ -173,15 +170,14 @@ const Shop = ({ isLoggedIn, setIsLoggedIn, setCurrentPage }) => {
                             Abmelden
                         </button>
                         {userEmail === 'admin@at24intern.de' && (
-    <button 
-        className="admin-button" 
-        style={{ backgroundColor: 'red', color: 'white' }}
-        onClick={() => setCurrentPage('admin')} // Setze die Seite auf "admin"
-    >
-        Admin
-    </button>
-)}
-
+                            <button 
+                                className="admin-button" 
+                                style={{ backgroundColor: 'red', color: 'white' }}
+                                onClick={() => setCurrentPage('admin')}
+                            >
+                                Admin
+                            </button>
+                        )}
                     </div>
 
                     <div className="product-grid">
@@ -240,7 +236,7 @@ const Shop = ({ isLoggedIn, setIsLoggedIn, setCurrentPage }) => {
                                             Warenkorb schließen
                                         </button>
                                     </>
-                                        ) : (
+                                ) : (
                                     <>
                                         <ul className="cart-list">
                                             {cart.map((item, index) => (
@@ -279,14 +275,12 @@ const Shop = ({ isLoggedIn, setIsLoggedIn, setCurrentPage }) => {
                                         <div className="cart-total">
                                             <h6>Gesamtpreis: {calculateTotal()} €</h6>
                                         </div>
-                                        <p></p>
                                         <button className="checkout-button" onClick={handleCheckout}>
-                            Bestellung bestätigen
-                        </button>
-                        <p></p>
-                        <button className="cart-modal-close" onClick={closeCartModal}>
-                                    Warenkorb schließen
-                                </button>
+                                            Bestellung bestätigen
+                                        </button>
+                                        <button className="cart-modal-close" onClick={closeCartModal}>
+                                            Warenkorb schließen
+                                        </button>
                                     </>
                                 )}
                             </div>
