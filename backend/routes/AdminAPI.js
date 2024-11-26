@@ -24,13 +24,16 @@ router.post(
                 `INSERT INTO product (title, description, price, image, quantity) VALUES (?, ?, ?, ?, ?)`,
                 [title, description, price, image, quantity]
             );
-            res.status(201).json({ success: true, message: 'Produkt erfolgreich erstellt.', productId: result.insertId });
+            // Konvertiere insertId von BigInt in eine normale Zahl
+            const productId = result.insertId.toString(); // Umwandlung zu String, falls du den Wert als ID weitergeben möchtest
+            res.status(201).json({ success: true, message: 'Produkt erfolgreich erstellt.', productId: productId });
         } catch (error) {
             console.error('Fehler beim Erstellen des Produkts:', error.message);
             res.status(500).json({ error: 'Fehler beim Erstellen des Produkts.' });
         }
     }
 );
+
 
 // Produkt aktualisieren
 router.put('/products/:id', async (req, res) => {
