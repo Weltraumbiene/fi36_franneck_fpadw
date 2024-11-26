@@ -3,6 +3,7 @@ import cors from 'cors';
 import apiRouter from './routes/api.js'; 
 import contactAPIRouter from './routes/ContactAPI.js'; 
 import loginRouter from './routes/LoginAPI.js'; 
+import adminRouter from './routes/AdminAPI.js';
 import jwt from 'jsonwebtoken';
 
 const app = express();
@@ -25,6 +26,7 @@ dotenv.config(); // Lädt die .env-Datei
 app.use('/api/login', loginRouter);
 app.use('/api', apiRouter);
 app.use('/contact', contactAPIRouter);
+app.use('/admin', adminRouter);
 
 // Start des Servers
 app.listen(4000, '0.0.0.0', () => {
