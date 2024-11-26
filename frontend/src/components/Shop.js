@@ -173,10 +173,14 @@ const Shop = ({ isLoggedIn, setIsLoggedIn, setCurrentPage }) => {
                             Abmelden
                         </button>
                         {userEmail === 'admin@at24intern.de' && (
-                        <button className="admin-button" style={{ backgroundColor: 'red', color: 'white' }}>
-                        Admin
-                        </button>
-                        )}
+    <button 
+        className="admin-button" 
+        style={{ backgroundColor: 'red', color: 'white' }}
+        onClick={() => setCurrentPage('admin')} // Setze die Seite auf "admin"
+    >
+        Admin
+    </button>
+)}
 
                     </div>
 

@@ -1,0 +1,162 @@
+/* Allgemeines Styling für den Admin-Bereich */
+.admin-container {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Überschrift des Admin-Bereichs */
+.admin-container h1 {
+    font-size: 2rem;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Styling für jede Sektion mit Überschrift */
+.admin-container h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+}
+
+/* Styling für Buttons */
+.admin-container button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 10px 0;
+}
+
+.admin-container button:hover {
+    background-color: #0056b3;
+}
+
+/* Pre-Tag für das Anzeigen von Nachrichten und Bestellungen */
+.admin-container pre {
+    background-color: #f4f4f4;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #333;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+/* Styling für die Produktfunktionen */
+.product-functions {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Styling für Benutzereingabefelder oder zusätzliche Formulare */
+.admin-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.admin-inputs input,
+.admin-inputs textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+/* Container für Produkt-, Bestell- und Nachrichten-Daten */
+.data-container {
+    margin-top: 30px;
+}
+
+.data-container h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #28a745;
+    padding-bottom: 5px;
+}
+
+/* Container für API-Daten (Nachrichten, Bestellungen) */
+.data-container pre {
+    background-color: #e9f7ef;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #333;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+/* Styling für Fehlermeldungen oder Alerts */
+.alert {
+    padding: 10px;
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+/* Styling für die Nachrichten und Bestellungen */
+.data-container {
+    margin-top: 30px;
+}
+
+.data-container h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #28a745;
+    padding-bottom: 5px;
+}
+
+/* Kartenansicht für Nachrichten */
+.message-list, .order-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.message-card, .order-card {
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.message-card h3, .order-card h3 {
+    font-size: 1.2rem;
+    color: #007bff;
+}
+
+.message-card p, .order-card p {
+    font-size: 1rem;
+    color: #555;
+}
+
+.message-card small, .order-card small {
+    font-size: 0.8rem;
+    color: #777;
+}
+
+/* Keine Nachrichten/Bestellungen */
+p {
+    font-size: 1.2rem;
+    color: #777;
+}
